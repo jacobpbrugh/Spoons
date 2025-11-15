@@ -152,6 +152,7 @@ function obj.buildChoice(action, v)
       choice.type = kind
       choice.plugin = obj.__name
       choice.image = icon
+      choice.uuid = obj.__name .. "__" .. action
       if v.description then
          choice.subText = v.description
       end

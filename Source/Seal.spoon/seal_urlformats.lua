@@ -56,6 +56,7 @@ function obj.choicesBareURL(query)
                 choice["url"] = query
                 choice["plugin"] = obj.__name
                 choice["image"] = hs.image.imageFromAppBundle(bundleID)
+                choice["uuid"] = obj.__name .. "__" .. bundleID
                 table.insert(choices, choice)
             end
         end
@@ -77,6 +78,7 @@ function obj.choicesURLPart(query)
         choice["type"] = "launch"
         choice["url"] = full_url
         choice["scheme"] = url_scheme
+        choice["uuid"] = obj.__name .. "__" .. name
         table.insert(choices, choice)
     end
     return choices

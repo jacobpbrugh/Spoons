@@ -247,6 +247,7 @@ function obj.choicesVPNCommand(query)
             choice["kind"] = kind
             choice["plugin"] = obj.__name
             choice["type"] = "toggle"
+            choice["uuid"] = obj.__name .. "__" .. name
             table.insert(choices, choice)
         end
     end
