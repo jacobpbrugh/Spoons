@@ -302,21 +302,11 @@ function obj.completionCallback(rowInfo)
 end
 
 ---------------------------------------------------------------------
--- Lifecycle
+-- Initialize on load (Seal doesn't call start() on plugins)
 ---------------------------------------------------------------------
 
--- Start is called when the plugin is loaded
-function obj:start()
-  self:_reindex()
-  self:_watch()
-end
-
--- Stop is called when the plugin is unloaded
-function obj:stop()
-  for _, w in ipairs(self._watchers) do
-    pcall(function() w:stop() end)
-  end
-  self._watchers = {}
-end
+-- Index bookmarks immediately when plugin is loaded
+obj:_reindex()
+obj:_watch()
 
 return obj
