@@ -298,11 +298,14 @@ function obj.completionCallback(rowInfo)
       local escapedURL = url:gsub("\\", "\\\\"):gsub('"', '\\"')
       local script = string.format([[
         tell application id "com.google.Chrome"
-          if (count of windows) is 0 then make new window
-          tell front window to make new tab with properties {URL:"%s"}
+          if (count of windows) is 0 then
+            make new window with properties {URL:"%s"}
+          else
+            tell front window to make new tab with properties {URL:"%s"}
+          end if
           activate
         end tell
-      ]], escapedURL)
+      ]], escapedURL, escapedURL)
       local ok, err = hs.osascript.applescript(script)
       if not ok then
         -- Fallback to default handler
