@@ -212,3 +212,4 @@ end
 - Spoon names use CamelCase (e.g., `MouseFollowsFocus`)
 - Documentation follows strict format for automated processing
 - Lua version: Uses Hammerspoon's embedded Lua runtime
+- I set `MJConfigFile` to ~/.config/hammerspoon/init.lua and my recency file to hs.configDir .. <filename> so  that Seal freqency file is store under  ~/.config/hammerspoon/ for my setup

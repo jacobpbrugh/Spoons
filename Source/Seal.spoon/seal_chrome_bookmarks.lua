@@ -244,12 +244,13 @@ function obj.choicesBookmarks(query)
         subText = subText .. "  (" .. e.profile .. ")"
       end
 
+      local uuid = obj.__name .. "__" .. e.url
       local choice = {
         text = e.title,
         subText = subText,
         url = e.url,
         image = obj.icon,
-        uuid = obj.__name .. "__" .. e.url,
+        uuid = uuid,
         plugin = obj.__name,
         type = "openURL",
         _score = s,
@@ -258,7 +259,21 @@ function obj.choicesBookmarks(query)
     end
   end
 
-  -- Sort by score (highest first)
+  -- Apply frecency boost BEFORE sorting and limiting
+  -- Access Seal's frecency data if available
+  if obj.seal and obj.seal.frecency_enable and obj.seal.frecency_data then
+    for _, choice in ipairs(choices) do
+      local frecency_data = obj.seal.frecency_data[choice.uuid]
+      if frecency_data and frecency_data.last_used then
+        -- Huge boost for recently used items (10000 points per recent use)
+        -- This ensures recently used bookmarks appear first regardless of match score
+        local recency_boost = frecency_data.last_used > 0 and 10000 or 0
+        choice._score = choice._score + recency_boost
+      end
+    end
+  end
+
+  -- Sort by score (highest first) - now includes frecency boost
   table.sort(choices, function(a, b) return a._score > b._score end)
 
   -- Limit results to avoid overwhelming the UI
