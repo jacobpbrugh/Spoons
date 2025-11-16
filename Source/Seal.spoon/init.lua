@@ -49,7 +49,7 @@ obj.plugin_search_paths = { hs.configdir .. "/seal_plugins", obj.spoonPath }
 
 --- Seal.frecency_enable
 --- Variable
---- Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them)
+--- Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).
 ---
 --- Notes:
 ---  * Defaults to `true`
