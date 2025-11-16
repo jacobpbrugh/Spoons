@@ -1,39 +1,80 @@
--- ChromeBookmarks.spoon
--- A tiny companion Spoon that loads a custom Seal plugin to search Google Chrome bookmarks.
--- Place this folder as ~/.hammerspoon/Spoons/ChromeBookmarks.spoon/
--- Then in your init.lua:
---   hs.loadSpoon("Seal")
---   spoon.Seal:start()
---   hs.loadSpoon("ChromeBookmarks")
---   spoon.ChromeBookmarks.profiles = "auto"           -- or { "Default", "Profile 1" }
---   spoon.ChromeBookmarks.keyword = "cb"              -- type: "cb <query>"
---   spoon.ChromeBookmarks.openBehavior = "chrome"     -- "chrome" or "default"
---   spoon.ChromeBookmarks.maxResults = 200
---   spoon.ChromeBookmarks:bindToSeal(spoon.Seal)
+--- === ChromeBookmarks ===
+---
+--- Search Google Chrome bookmarks via Seal
+---
+--- Download: [https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip](https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip)
+---
+--- This Spoon provides a Seal plugin to search and open Google Chrome bookmarks.
+--- It automatically indexes bookmarks from all Chrome profiles and provides fast fuzzy searching.
+---
+--- Example usage:
+--- ```
+--- hs.loadSpoon("Seal")
+--- spoon.Seal:start()
+--- hs.loadSpoon("ChromeBookmarks")
+--- spoon.ChromeBookmarks.profiles = "auto"           -- or { "Default", "Profile 1" }
+--- spoon.ChromeBookmarks.keyword = "cb"              -- type: "cb <query>"
+--- spoon.ChromeBookmarks.openBehavior = "chrome"     -- "chrome" or "default"
+--- spoon.ChromeBookmarks.maxResults = 200
+--- spoon.ChromeBookmarks:bindToSeal(spoon.Seal)
+--- ```
 
 local obj = {}
 obj.__index = obj
 
+-- Metadata
 obj.name = "ChromeBookmarks"
 obj.version = "0.1.0"
-obj.author = "ChatGPT"
+obj.author = "Jacob Brugh"
 obj.homepage = "https://github.com/Hammerspoon/Spoons"
-obj.license = "MIT"
+obj.license = "MIT - https://opensource.org/licenses/MIT"
 
--- User-configurable values (you can override from hs.init.lua before calling :bindToSeal)
-obj.keyword = "cb"                -- Seal command keyword
-obj.profiles = "auto"             -- "auto" or list like { "Default", "Profile 1" }
-obj.maxResults = 200              -- clamp results shown in Seal
-obj.openBehavior = "chrome"       -- "chrome" | "default"
+--- ChromeBookmarks.keyword
+--- Variable
+--- The keyword to trigger Chrome bookmarks search in Seal. Default: "cb"
+obj.keyword = "cb"
+
+--- ChromeBookmarks.profiles
+--- Variable
+--- Which Chrome profiles to index. Can be "auto" to auto-detect all profiles, or a table like { "Default", "Profile 1" }. Default: "auto"
+obj.profiles = "auto"
+
+--- ChromeBookmarks.maxResults
+--- Variable
+--- Maximum number of search results to display. Default: 200
+obj.maxResults = 200
+
+--- ChromeBookmarks.openBehavior
+--- Variable
+--- How to open bookmarks. "chrome" opens in Chrome, "default" uses system default browser. Default: "chrome"
+obj.openBehavior = "chrome"
+
+--- ChromeBookmarks.logLevel
+--- Variable
+--- Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)
+obj.logLevel = nil
 
 -- Helper to get the absolute path of this spoon, for loading the plugin file.
 local function scriptPath()
-  local str = debug.getinfo(2, "S").source:sub(2)
+  local str = debug.getinfo(1, "S").source:sub(2)
   return str:match("(.*/)") or ""
 end
 obj.spoonPath = scriptPath()
 
--- Bind this Spoon to a running Seal instance by loading the plugin from our folder and passing config
+--- ChromeBookmarks:bindToSeal(seal)
+--- Method
+--- Binds the Chrome bookmarks plugin to a running Seal instance
+---
+--- Parameters:
+---  * seal - A running Seal spoon instance (e.g., spoon.Seal)
+---
+--- Returns:
+---  * The ChromeBookmarks object for method chaining
+---
+--- Notes:
+---  * This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings
+---  * You must call this after configuring the Spoon's variables (keyword, profiles, etc.)
+---  * The plugin will automatically start indexing bookmarks when Seal starts
 function obj:bindToSeal(seal)
   if not seal then
     hs.alert.show("ChromeBookmarks: Seal instance not provided")

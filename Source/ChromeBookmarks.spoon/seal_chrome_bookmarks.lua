@@ -116,13 +116,21 @@ end
 -- auto-detect profiles present in the Chrome user dir
 local function detect_profiles(chromeUserDir)
   local profiles = {}
+  -- Check if Chrome directory exists
+  if not file_exists(chromeUserDir) then
+    return profiles
+  end
   -- Default plus numbered profiles whose dirs contain "Bookmarks"
   if file_exists(chromeUserDir .. "/Default/Bookmarks") then
     table.insert(profiles, "Default")
   end
   -- Iterate subdirs
-  for name in hs.fs.dir(chromeUserDir) do
-    if name and name:match("^Profile %d+$") then
+  local ok, iter, dirObj = pcall(hs.fs.dir, chromeUserDir)
+  if not ok or not iter then
+    return profiles
+  end
+  for name in iter, dirObj do
+    if name and name ~= "." and name ~= ".." and name:match("^Profile %d+$") then
       if file_exists(chromeUserDir .. "/" .. name .. "/Bookmarks") then
         table.insert(profiles, name)
       end
@@ -131,18 +139,21 @@ local function detect_profiles(chromeUserDir)
   return profiles
 end
 
+function obj:_getProfiles()
+  -- Determine which profiles to use based on configuration
+  if self.profiles == "auto" or (type(self.profiles) == "string" and self.profiles:lower() == "auto") then
+    return detect_profiles(self._chromeUserDir)
+  elseif type(self.profiles) == "table" then
+    return self.profiles
+  else
+    return { "Default" }
+  end
+end
+
 function obj:_reindex()
   local t0 = hs.timer.secondsSinceEpoch()
   local list = {}
-  local useProfiles = {}
-
-  if self.profiles == "auto" or (type(self.profiles) == "string" and self.profiles:lower() == "auto") then
-    useProfiles = detect_profiles(self._chromeUserDir)
-  elseif type(self.profiles) == "table" then
-    useProfiles = self.profiles
-  else
-    useProfiles = { "Default" }
-  end
+  local useProfiles = self:_getProfiles()
 
   for _, p in ipairs(useProfiles) do
     local f = self._chromeUserDir .. "/" .. p .. "/Bookmarks"
@@ -152,7 +163,7 @@ function obj:_reindex()
   end
 
   self._index = list
-  self.logger.i(string.format("Indexed %d Chrome bookmarks in %.0f ms", #list, (hs.timer.secondsSinceEpoch()-t0)*1000))
+  self.logger:i(string.format("Indexed %d Chrome bookmarks in %.0f ms", #list, (hs.timer.secondsSinceEpoch()-t0)*1000))
 end
 
 function obj:_watch()
@@ -160,14 +171,7 @@ function obj:_watch()
   for _, w in ipairs(self._watchers) do pcall(function() w:stop() end) end
   self._watchers = {}
 
-  local useProfiles = {}
-  if self.profiles == "auto" or (type(self.profiles) == "string" and self.profiles:lower() == "auto") then
-    useProfiles = detect_profiles(self._chromeUserDir)
-  elseif type(self.profiles) == "table" then
-    useProfiles = self.profiles
-  else
-    useProfiles = { "Default" }
-  end
+  local useProfiles = self:_getProfiles()
 
   for _, p in ipairs(useProfiles) do
     local f = self._chromeUserDir .. "/" .. p .. "/Bookmarks"
@@ -233,12 +237,12 @@ function obj:choicesForQuery(query)
   local q = normalize(query)
 
   -- Respect keyword
-  local kw = (self.keyword or "cb") .. " "
+  local kw = normalize(self.keyword or "cb") .. " "
   local usingKeyword = false
   if starts_with(q, kw) then
     q = q:sub(#kw + 1)
     usingKeyword = true
-  elseif q == (self.keyword or "cb") then
+  elseif q == normalize(self.keyword or "cb") then
     -- Just "cb" with no trailing space => show hint
     usingKeyword = true
     q = ""
@@ -295,16 +299,19 @@ function obj:completionCallback(choice)
 
   if (self.openBehavior or "chrome") == "chrome" then
     -- open in Google Chrome via AppleScript so it reuses existing window
-    local script = [[
+    -- Properly escape URL for AppleScript string (backslashes and quotes)
+    local escapedURL = url:gsub("\\", "\\\\"):gsub('"', '\\"')
+    local script = string.format([[
       tell application id "com.google.Chrome"
         if (count of windows) is 0 then make new window
-        tell front window to make new tab with properties {URL:%q}
+        tell front window to make new tab with properties {URL:"%s"}
         activate
       end tell
-    ]]
-    local ok, err = hs.osascript.applescript(string.format(script, url))
+    ]], escapedURL)
+    local ok, err = hs.osascript.applescript(script)
     if not ok then
       -- Fallback to default handler
+      self.logger:w("AppleScript failed to open URL in Chrome: " .. tostring(err))
       hs.urlevent.openURL(url)
     end
   else
