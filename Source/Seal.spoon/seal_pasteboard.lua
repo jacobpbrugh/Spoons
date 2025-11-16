@@ -150,7 +150,7 @@ end
 
 function obj.save()
     local json = hs.json.encode(obj.itemBuffer)
-    local file = io.open(os.getenv("HOME") .. "/.hammerspoon/pasteboard_history.json", "w")
+    local file = io.open( hs.configdir .. "/pasteboard_history.json", "w")
     if file then
         file:write(json)
         file:close()
@@ -158,7 +158,7 @@ function obj.save()
 end
 
 function obj.load()
-    local file = io.open(os.getenv("HOME") .. "/.hammerspoon/pasteboard_history.json", "r")
+    local file = io.open( hs.configdir .. "/pasteboard_history.json", "r")
     if file then
         local json = hs.json.decode(file:read())
         if json then
