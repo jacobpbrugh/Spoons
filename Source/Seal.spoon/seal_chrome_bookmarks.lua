@@ -294,18 +294,15 @@ function obj.completionCallback(rowInfo)
     local url = rowInfo["url"]
 
     if obj.always_open_with_chrome then
-      -- Open in Chrome via AppleScript to reuse existing window
+      -- Open in Chrome via AppleScript in a new window
       local escapedURL = url:gsub("\\", "\\\\"):gsub('"', '\\"')
       local script = string.format([[
         tell application id "com.google.Chrome"
-          if (count of windows) is 0 then
-            make new window with properties {URL:"%s"}
-          else
-            tell front window to make new tab with properties {URL:"%s"}
-          end if
+          make new window
+          set URL of active tab of front window to "%s"
           activate
         end tell
-      ]], escapedURL, escapedURL)
+      ]], escapedURL)
       local ok, err = hs.osascript.applescript(script)
       if not ok then
         -- Fallback to default handler
