@@ -20,17 +20,17 @@ jobs:
     runs-on: ubuntu-latest
 
     # Only run this if we're on the official repo. This prevents forks from getting super confusing with commits. If you want to host you own Spoon repository, consider re-enabling this, but for your repo.
-    if: github.repository == 'Hammerspoon/Spoons'
+    if: github.repository == 'jacobpbrugh/Spoons'
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Check-out the Spoons PR
     - uses: actions/checkout@v4
 
-    # Check-out the Hammerspoon repository we need for doc building
+    # Check-out the jacobpbrugh repository we need for doc building
     - uses: actions/checkout@v4
       with:
-        repository: 'Hammerspoon/hammerspoon'
+        repository: 'jacobpbrugh/hammerspoon'
         path: 'hammerspoon'
 
     # Install doc-building dependencies
