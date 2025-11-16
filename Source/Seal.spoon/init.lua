@@ -7,12 +7,13 @@
 --- Seal includes a number of plugins, which you can choose to load (see `:loadPlugins()` below):
 ---  * apps : Launch applications by name
 ---  * calc : Simple calculator
+---  * chrome_bookmarks : Search and open Google Chrome bookmarks
 ---  * rot13 : Apply ROT13 substitution cipher
 ---  * safari_bookmarks : Open Safari bookmarks (this is broken since at least High Sierra)
 ---  * screencapture : Lets you take screenshots in various ways
 ---  * urlformats : User defined URL formats to open
 ---  * useractions : User defined custom actions
----  * vpn : Connect and disconnect VPNs (currently supports Viscosity and macOS system preferences)A
+---  * vpn : Connect and disconnect VPNs (currently supports Viscosity and macOS system preferences)
 
 
 local obj = {}

@@ -1,30 +1,31 @@
--- seal_chrome_bookmarks.lua
--- A Seal plugin that indexes and searches Google Chrome bookmarks.
--- Saved as "seal_chrome_bookmarks.lua". Loaded via Seal:loadPluginFromFile("chrome_bookmarks", <path>).
--- Invoked with the keyword set in `keyword` (default "cb").
+--- === Seal.plugins.chrome_bookmarks ===
+--- Search and open Google Chrome bookmarks from Seal
+---
+--- Automatically indexes bookmarks from all Chrome profiles and provides fast searching.
+--- Bookmarks appear in the default Seal results - no keyword required.
 
 local obj = {}
 obj.__index = obj
+obj.__name = "seal_chrome_bookmarks"
 
--- Metadata mostly for logging
-obj.__name = "chrome_bookmarks"
+--- Seal.plugins.chrome_bookmarks.profiles
+--- Variable
+--- Which Chrome profiles to index. Can be "auto" to auto-detect all profiles, or a table like { "Default", "Profile 1" }. Default: "auto"
+obj.profiles = "auto"
 
--- Configurable fields (can be overridden after loading via spoon.Seal.plugins.chrome_bookmarks.*)
-obj.keyword = "cb"              -- command prefix inside Seal
-obj.maxResults = 200
-obj.openBehavior = "chrome"     -- "chrome" or "default"
-obj.profiles = "auto"           -- "auto" or table like { "Default", "Profile 1" }
+--- Seal.plugins.chrome_bookmarks.always_open_with_chrome
+--- Variable
+--- If `true` (default), bookmarks are always opened with Chrome. If `false`, they are opened with the default browser.
+obj.always_open_with_chrome = true
 
 -- Internals
-obj.logger = hs.logger.new("SealChromeBM", "info")
-obj._icon = hs.image.imageFromAppBundle("com.google.Chrome") or hs.image.imageFromName(hs.image.systemImageNames.Network)
-
+obj.logger = hs.logger.new("seal_chrome_bookmarks", "info")
+obj.icon = hs.image.imageFromAppBundle("com.google.Chrome") or hs.image.imageFromName(hs.image.systemImageNames.Network)
 obj._chromeUserDir = os.getenv("HOME") .. "/Library/Application Support/Google/Chrome"
-obj._index = {}       -- flat list of entries
+obj._index = {}       -- flat list of bookmark entries
 obj._watchers = {}    -- pathwatchers per profile bookmarks file
 
--- Entry shape:
--- { title=string, url=string, path=string, host=string, profile=string }
+-- Entry shape: { title=string, url=string, path=string, host=string, profile=string }
 
 ---------------------------------------------------------------------
 -- Utilities
@@ -46,10 +47,6 @@ local function normalize(s)
   return (s or ""):lower()
 end
 
-local function starts_with(s, prefix)
-  return s:sub(1, #prefix) == prefix
-end
-
 local function split_words(s)
   local t = {}
   for w in s:gmatch("%S+") do t[#t+1] = w end
@@ -62,12 +59,6 @@ local function domain_from_url(u)
     host = u:match("^([^/]+)/") or ""
   end
   return host or ""
-end
-
-local function clamp(n, lo, hi)
-  if n < lo then return lo end
-  if n > hi then return hi end
-  return n
 end
 
 ---------------------------------------------------------------------
@@ -113,7 +104,7 @@ local function parse_bookmarks_file(path, profile, acc)
   end
 end
 
--- auto-detect profiles present in the Chrome user dir
+-- Auto-detect profiles present in the Chrome user dir
 local function detect_profiles(chromeUserDir)
   local profiles = {}
   -- Check if Chrome directory exists
@@ -184,7 +175,7 @@ function obj:_watch()
 end
 
 ---------------------------------------------------------------------
--- Search
+-- Search and scoring
 ---------------------------------------------------------------------
 
 -- Score a bookmark entry against query tokens
@@ -196,7 +187,7 @@ local function score_entry(e, tokens)
 
   local score = 0
 
-  -- strong boosts
+  -- Strong boosts for matches
   for _, tok in ipairs(tokens) do
     local t = normalize(tok)
     if #t == 0 then goto continue end
@@ -207,143 +198,125 @@ local function score_entry(e, tokens)
     ::continue::
   end
 
-  -- exact domain equals token bonus
+  -- Exact domain match bonus
   for _, tok in ipairs(tokens) do
-    if host == tok then score = score + 50 end
+    if normalize(tok) == host then score = score + 50 end
   end
 
   return score
 end
 
-local function build_choice(e, score, icon)
-  local sub = e.host
-  if e.path and e.path ~= "" then
-    sub = sub .. "  —  " .. e.path
-  end
-  sub = sub .. "  (" .. e.profile .. ")"
-  return {
-    text = e.title,
-    subText = sub,
-    image = icon,
-    url = e.url,
-    _score = score,
-  }
+---------------------------------------------------------------------
+-- Seal plugin API
+---------------------------------------------------------------------
+
+function obj:commands()
+  -- No commands - we use bare() for default search
+  return {}
 end
 
--- Main entrypoint used by Seal when query changes.
--- Seal calls all loaded plugins, but in practice we only react to our keyword prefix to avoid noise.
-function obj:choicesForQuery(query)
-  query = query or ""
-  local q = normalize(query)
+function obj:bare()
+  -- Return the function that handles bare queries (no command prefix)
+  return self.choicesBookmarks
+end
 
-  -- Respect keyword
-  local kw = normalize(self.keyword or "cb") .. " "
-  local usingKeyword = false
-  if starts_with(q, kw) then
-    q = q:sub(#kw + 1)
-    usingKeyword = true
-  elseif q == normalize(self.keyword or "cb") then
-    -- Just "cb" with no trailing space => show hint
-    usingKeyword = true
-    q = ""
-  end
-
-  if not usingKeyword then
+function obj.choicesBookmarks(query)
+  if not query or query == "" then
     return {}
   end
 
-  -- No query => show a few recent/frequent picks (we don't track MRU here, so show top alphabetically by title)
-  local tokens = split_words(q)
+  local tokens = split_words(query)
+  if #tokens == 0 then
+    return {}
+  end
+
   local choices = {}
 
-  if #tokens == 0 then
-    -- Show first N alphabetically
-    local tmp = {}
-    for _, e in ipairs(self._index) do
-      table.insert(tmp, e)
-    end
-    table.sort(tmp, function(a,b) return a.title:lower() < b.title:lower() end)
-    local n = 0
-    for _, e in ipairs(tmp) do
-      choices[#choices+1] = build_choice(e, 0, self._icon)
-      n = n + 1
-      if n >= clamp(self.maxResults or 200, 1, 5000) then break end
-    end
-    return choices
-  end
-
-  -- Filter and rank
-  local MAX = clamp(self.maxResults or 200, 1, 5000)
-  for _, e in ipairs(self._index) do
+  -- Filter and rank bookmarks
+  for _, e in ipairs(obj._index) do
     local s = score_entry(e, tokens)
     if s > 0 then
-      choices[#choices+1] = build_choice(e, s, self._icon)
+      local subText = e.host
+      if e.path and e.path ~= "" then
+        subText = subText .. "  —  " .. e.path
+      end
+      if e.profile and e.profile ~= "Default" then
+        subText = subText .. "  (" .. e.profile .. ")"
+      end
+
+      local choice = {
+        text = e.title,
+        subText = subText,
+        url = e.url,
+        image = obj.icon,
+        uuid = obj.__name .. "__" .. e.url,
+        plugin = obj.__name,
+        type = "openURL",
+        _score = s,
+      }
+      table.insert(choices, choice)
     end
   end
-  table.sort(choices, function(a,b) return a._score > b._score end)
 
-  -- Trim
-  if #choices > MAX then
+  -- Sort by score (highest first)
+  table.sort(choices, function(a, b) return a._score > b._score end)
+
+  -- Limit results to avoid overwhelming the UI
+  local maxResults = 50
+  if #choices > maxResults then
     local trimmed = {}
-    for i=1,MAX do trimmed[i] = choices[i] end
+    for i = 1, maxResults do
+      trimmed[i] = choices[i]
+    end
     choices = trimmed
   end
 
   return choices
 end
 
--- Called by Seal when the user selects an entry.
-function obj:completionCallback(choice)
-  if not choice or not choice.url then return end
-  local url = choice.url
+function obj.completionCallback(rowInfo)
+  if rowInfo["type"] == "openURL" then
+    local url = rowInfo["url"]
 
-  if (self.openBehavior or "chrome") == "chrome" then
-    -- open in Google Chrome via AppleScript so it reuses existing window
-    -- Properly escape URL for AppleScript string (backslashes and quotes)
-    local escapedURL = url:gsub("\\", "\\\\"):gsub('"', '\\"')
-    local script = string.format([[
-      tell application id "com.google.Chrome"
-        if (count of windows) is 0 then make new window
-        tell front window to make new tab with properties {URL:"%s"}
-        activate
-      end tell
-    ]], escapedURL)
-    local ok, err = hs.osascript.applescript(script)
-    if not ok then
-      -- Fallback to default handler
-      self.logger:w("AppleScript failed to open URL in Chrome: " .. tostring(err))
+    if obj.always_open_with_chrome then
+      -- Open in Chrome via AppleScript to reuse existing window
+      local escapedURL = url:gsub("\\", "\\\\"):gsub('"', '\\"')
+      local script = string.format([[
+        tell application id "com.google.Chrome"
+          if (count of windows) is 0 then make new window
+          tell front window to make new tab with properties {URL:"%s"}
+          activate
+        end tell
+      ]], escapedURL)
+      local ok, err = hs.osascript.applescript(script)
+      if not ok then
+        -- Fallback to default handler
+        obj.logger:w("AppleScript failed to open URL in Chrome: " .. tostring(err))
+        hs.urlevent.openURL(url)
+      end
+    else
+      -- Use default browser
       hs.urlevent.openURL(url)
     end
-  else
-    -- default handler
-    hs.urlevent.openURL(url)
   end
 end
 
 ---------------------------------------------------------------------
--- Plugin lifecycle hooks expected by Seal
+-- Lifecycle
 ---------------------------------------------------------------------
 
+-- Start is called when the plugin is loaded
 function obj:start()
   self:_reindex()
   self:_watch()
 end
 
+-- Stop is called when the plugin is unloaded
 function obj:stop()
-  for _, w in ipairs(self._watchers) do pcall(function() w:stop() end) end
+  for _, w in ipairs(self._watchers) do
+    pcall(function() w:stop() end)
+  end
   self._watchers = {}
-end
-
--- Some versions of Seal allow dynamic command lists via :commands()
--- We expose one command (self.keyword) to scope our search.
-function obj:commands()
-  return {
-    [self.keyword or "cb"] = {
-      cmd = self.keyword or "cb",
-      name = "Chrome Bookmarks",
-      description = "Search Google Chrome bookmarks",
-    }
-  }
 end
 
 return obj
