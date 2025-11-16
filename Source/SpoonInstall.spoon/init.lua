@@ -169,6 +169,7 @@ end
 --- Notes:
 ---  * For now, the repository data is not persisted, so you need to update it after every restart if you want to use any of the install functions.
 function obj:asyncUpdateAllRepos()
+   obj.logger.i("Starting async update of all Spoon repositories...")
    for k,v in pairs(self.repos) do
       self:asyncUpdateRepo(k)
    end
@@ -188,6 +189,7 @@ end
 ---  * This is a synchronous call, which means Hammerspoon will be blocked until it finishes.
 ---  * For now, the repository data is not persisted, so you need to update it after every restart if you want to use any of the install functions.
 function obj:updateAllRepos()
+   obj.logger.i("Starting update of all Spoon repositories...")
    for k,v in pairs(self.repos) do
       self:updateRepo(k)
    end
@@ -271,7 +273,7 @@ function obj:_installSpoonFromZipURLgetCallback(urlparts, callback, status, body
                   success=true
                end
             else
-               self.logger.ef("The downloaded zip file %s is invalid - it should contain exactly one spoon. Leaving it in place for your examination.", outfile) 
+               self.logger.ef("The downloaded zip file %s is invalid - it should contain exactly one spoon. Leaving it in place for your examination.", outfile)
             end
          end
       end
