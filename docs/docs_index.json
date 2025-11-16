@@ -2631,6 +2631,18 @@
     "type": "Module"
   },
   {
+    "desc": "Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).",
+    "module": "Seal",
+    "name": "frecency_enable",
+    "type": "Variable"
+  },
+  {
+    "desc": "Path to the JSON file where frecency data is stored",
+    "module": "Seal",
+    "name": "frecency_storage_path",
+    "type": "Variable"
+  },
+  {
     "desc": "List of directories where Seal will look for plugins. Defaults to `~/.hammerspoon/seal_plugins/` and the Seal Spoon directory.",
     "module": "Seal",
     "name": "plugin_search_paths",
@@ -2649,6 +2661,24 @@
     "type": "Method"
   },
   {
+    "desc": "Calculate the recency score for a given item",
+    "module": "Seal",
+    "name": "calculateFrecencyScore",
+    "type": "Method"
+  },
+  {
+    "desc": "Clear all usage history (reset recency tracking)",
+    "module": "Seal",
+    "name": "clearFrecencyData",
+    "type": "Method"
+  },
+  {
+    "desc": "Load frecency data from disk",
+    "module": "Seal",
+    "name": "loadFrecencyData",
+    "type": "Method"
+  },
+  {
     "desc": "Loads a plugin from a given file",
     "module": "Seal",
     "name": "loadPluginFromFile",
@@ -2658,6 +2688,12 @@
     "desc": "Loads a list of Seal plugins",
     "module": "Seal",
     "name": "loadPlugins",
+    "type": "Method"
+  },
+  {
+    "desc": "Record a selection in the frecency database",
+    "module": "Seal",
+    "name": "recordSelection",
     "type": "Method"
   },
   {
@@ -2673,9 +2709,21 @@
     "type": "Method"
   },
   {
+    "desc": "Save frecency data to disk",
+    "module": "Seal",
+    "name": "saveFrecencyData",
+    "type": "Method"
+  },
+  {
     "desc": "Shows the Seal UI",
     "module": "Seal",
     "name": "show",
+    "type": "Method"
+  },
+  {
+    "desc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)",
+    "module": "Seal",
+    "name": "sortChoicesByFrecency",
     "type": "Method"
   },
   {

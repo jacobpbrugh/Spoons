@@ -18138,7 +18138,7 @@
         "doc_gfm": "<p>Binds hotkeys for Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>mapping - A table containing hotkey modifier/key details for the following (optional) items:</li>\n<li>show - This will cause Seal's UI to be shown</li>\n<li>toggle - This will cause Seal's UI to be shown or hidden depending on its current state</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "157",
+        "lineno": "337",
         "name": "bindHotkeys",
         "notes": [],
         "notes_gfm": "",
@@ -18155,6 +18155,82 @@
         "type": "Method"
       },
       {
+        "def": "Seal:calculateFrecencyScore(uuid, query)",
+        "def_gfm": "Seal:calculateFrecencyScore(uuid, query)",
+        "desc": "Calculate the recency score for a given item",
+        "desc_gfm": "<p>Calculate the recency score for a given item</p>\n",
+        "doc": "Calculate the recency score for a given item\n\nParameters:\n * uuid - The unique identifier of the item\n * query - The current query string (unused, kept for API compatibility)\n\nReturns:\n * The last_used timestamp (number), or 0 if no history exists",
+        "doc_gfm": "<p>Calculate the recency score for a given item</p>\n<p>Parameters:</p>\n<ul>\n<li>uuid - The unique identifier of the item</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The last_used timestamp (number), or 0 if no history exists</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "156",
+        "name": "calculateFrecencyScore",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * uuid - The unique identifier of the item",
+          " * query - The current query string (unused, kept for API compatibility)"
+        ],
+        "parameters_gfm": "<ul>\n<li>uuid - The unique identifier of the item</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n",
+        "returns": [
+          " * The last_used timestamp (number), or 0 if no history exists"
+        ],
+        "returns_gfm": "<ul>\n<li>The last_used timestamp (number), or 0 if no history exists</li>\n</ul>\n",
+        "signature": "Seal:calculateFrecencyScore(uuid, query)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Seal:clearFrecencyData()",
+        "def_gfm": "Seal:clearFrecencyData()",
+        "desc": "Clear all usage history (reset recency tracking)",
+        "desc_gfm": "<p>Clear all usage history (reset recency tracking)</p>\n",
+        "doc": "Clear all usage history (reset recency tracking)\n\nParameters:\n * None\n\nReturns:\n * The Seal object",
+        "doc_gfm": "<p>Clear all usage history (reset recency tracking)</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "211",
+        "name": "clearFrecencyData",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * None"
+        ],
+        "parameters_gfm": "<ul>\n<li>None</li>\n</ul>\n",
+        "returns": [
+          " * The Seal object"
+        ],
+        "returns_gfm": "<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "signature": "Seal:clearFrecencyData()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Seal:loadFrecencyData()",
+        "def_gfm": "Seal:loadFrecencyData()",
+        "desc": "Load frecency data from disk",
+        "desc_gfm": "<p>Load frecency data from disk</p>\n",
+        "doc": "Load frecency data from disk\n\nParameters:\n * None\n\nReturns:\n * The Seal object",
+        "doc_gfm": "<p>Load frecency data from disk</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "71",
+        "name": "loadFrecencyData",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * None"
+        ],
+        "parameters_gfm": "<ul>\n<li>None</li>\n</ul>\n",
+        "returns": [
+          " * The Seal object"
+        ],
+        "returns_gfm": "<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "signature": "Seal:loadFrecencyData()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
         "def": "Seal:loadPluginFromFile(plugin_name, file)",
         "def_gfm": "Seal:loadPluginFromFile(plugin_name, file)",
         "desc": "Loads a plugin from a given file",
@@ -18163,7 +18239,7 @@
         "doc_gfm": "<p>Loads a plugin from a given file</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin, without &quot;seal_&quot; at the beginning or &quot;.lua&quot; at the end</li>\n<li>file - the file where the plugin code is stored.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object if the plugin was successfully loaded, <code>nil</code> otherwise</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>You should normally use <code>Seal:loadPlugins()</code>. This method allows you to load plugins\nfrom non-standard locations and is mostly a development interface.</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "94",
+        "lineno": "271",
         "name": "loadPluginFromFile",
         "notes": [
           " * You should normally use `Seal:loadPlugins()`. This method allows you to load plugins",
@@ -18193,7 +18269,7 @@
         "doc_gfm": "<p>Loads a list of Seal plugins</p>\n<p>Parameters:</p>\n<ul>\n<li>plugins - A list containing the names of plugins to load</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>The plugins live inside the Seal.spoon directory</li>\n<li>The plugin names in the list, should not have <code>seal_</code> at the start, or <code>.lua</code> at the end</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "122",
+        "lineno": "299",
         "name": "loadPlugins",
         "notes": [
           " * The plugins live inside the Seal.spoon directory",
@@ -18214,6 +18290,32 @@
         "type": "Method"
       },
       {
+        "def": "Seal:recordSelection(query, uuid)",
+        "def_gfm": "Seal:recordSelection(query, uuid)",
+        "desc": "Record a selection in the frecency database",
+        "desc_gfm": "<p>Record a selection in the frecency database</p>\n",
+        "doc": "Record a selection in the frecency database\n\nParameters:\n * query - The query string used when the selection was made (currently unused, kept for API compatibility)\n * uuid - The unique identifier of the selected item\n\nReturns:\n * The Seal object",
+        "doc_gfm": "<p>Record a selection in the frecency database</p>\n<p>Parameters:</p>\n<ul>\n<li>query - The query string used when the selection was made (currently unused, kept for API compatibility)</li>\n<li>uuid - The unique identifier of the selected item</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "123",
+        "name": "recordSelection",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * query - The query string used when the selection was made (currently unused, kept for API compatibility)",
+          " * uuid - The unique identifier of the selected item"
+        ],
+        "parameters_gfm": "<ul>\n<li>query - The query string used when the selection was made (currently unused, kept for API compatibility)</li>\n<li>uuid - The unique identifier of the selected item</li>\n</ul>\n",
+        "returns": [
+          " * The Seal object"
+        ],
+        "returns_gfm": "<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "signature": "Seal:recordSelection(query, uuid)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
         "def": "Seal:refreshAllCommands()",
         "def_gfm": "Seal:refreshAllCommands()",
         "desc": "Refresh the list of commands provided by all the currently loaded plugins.",
@@ -18222,7 +18324,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by all the currently loaded plugins.</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "75",
+        "lineno": "252",
         "name": "refreshAllCommands",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -18249,7 +18351,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by the given plugin.</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin. Should be the name as passed to <code>loadPlugins()</code> or <code>loadPluginFromFile</code>.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "50",
+        "lineno": "227",
         "name": "refreshCommandsForPlugin",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -18268,6 +18370,31 @@
         "type": "Method"
       },
       {
+        "def": "Seal:saveFrecencyData()",
+        "def_gfm": "Seal:saveFrecencyData()",
+        "desc": "Save frecency data to disk",
+        "desc_gfm": "<p>Save frecency data to disk</p>\n",
+        "doc": "Save frecency data to disk\n\nParameters:\n * None\n\nReturns:\n * The Seal object",
+        "doc_gfm": "<p>Save frecency data to disk</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "98",
+        "name": "saveFrecencyData",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * None"
+        ],
+        "parameters_gfm": "<ul>\n<li>None</li>\n</ul>\n",
+        "returns": [
+          " * The Seal object"
+        ],
+        "returns_gfm": "<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "signature": "Seal:saveFrecencyData()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
         "def": "Seal:show(query)",
         "def_gfm": "Seal:show(query)",
         "desc": "Shows the Seal UI",
@@ -18276,7 +18403,7 @@
         "doc_gfm": "<p>Shows the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This may be useful if you wish to show Seal in response to something other than its hotkey</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "234",
+        "lineno": "414",
         "name": "show",
         "notes": [
           " * This may be useful if you wish to show Seal in response to something other than its hotkey"
@@ -18295,6 +18422,32 @@
         "type": "Method"
       },
       {
+        "def": "Seal:sortChoicesByFrecency(choices, query)",
+        "def_gfm": "Seal:sortChoicesByFrecency(choices, query)",
+        "desc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)",
+        "desc_gfm": "<p>Sort a list of choices by recency (items used before appear first, sorted by most recent)</p>\n",
+        "doc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)\n\nParameters:\n * choices - A table of choice items\n * query - The current query string (unused, kept for API compatibility)\n\nReturns:\n * The sorted choices table",
+        "doc_gfm": "<p>Sort a list of choices by recency (items used before appear first, sorted by most recent)</p>\n<p>Parameters:</p>\n<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The sorted choices table</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "179",
+        "name": "sortChoicesByFrecency",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * choices - A table of choice items",
+          " * query - The current query string (unused, kept for API compatibility)"
+        ],
+        "parameters_gfm": "<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n",
+        "returns": [
+          " * The sorted choices table"
+        ],
+        "returns_gfm": "<ul>\n<li>The sorted choices table</li>\n</ul>\n",
+        "signature": "Seal:sortChoicesByFrecency(choices, query)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
         "def": "Seal:start()",
         "def_gfm": "Seal:start()",
         "desc": "Starts Seal",
@@ -18303,7 +18456,7 @@
         "doc_gfm": "<p>Starts Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "190",
+        "lineno": "370",
         "name": "start",
         "notes": [],
         "notes_gfm": "",
@@ -18328,7 +18481,7 @@
         "doc_gfm": "<p>Stops Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "210",
+        "lineno": "390",
         "name": "stop",
         "notes": [
           " * Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)"
@@ -18355,7 +18508,7 @@
         "doc_gfm": "<p>Shows or hides the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "252",
+        "lineno": "432",
         "name": "toggle",
         "notes": [],
         "notes_gfm": "",
@@ -18373,6 +18526,44 @@
       }
     ],
     "Variable": [
+      {
+        "def": "Seal.frecency_enable",
+        "def_gfm": "Seal.frecency_enable",
+        "desc": "Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).",
+        "desc_gfm": "<p>Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).</p>\n",
+        "doc": "Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).\n\nNotes:\n * Defaults to `true`\n * When enabled, Seal will track which results you select and prioritize them in future searches\n * Items you've selected before appear at the top, sorted by most recent first",
+        "doc_gfm": "<p>Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).</p>\n<p>Notes:</p>\n<ul>\n<li>Defaults to <code>true</code></li>\n<li>When enabled, Seal will track which results you select and prioritize them in future searches</li>\n<li>Items you've selected before appear at the top, sorted by most recent first</li>\n</ul>\n",
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "50",
+        "name": "frecency_enable",
+        "notes": [
+          " * Defaults to `true`",
+          " * When enabled, Seal will track which results you select and prioritize them in future searches",
+          " * Items you've selected before appear at the top, sorted by most recent first"
+        ],
+        "notes_gfm": "<ul>\n<li>Defaults to <code>true</code></li>\n<li>When enabled, Seal will track which results you select and prioritize them in future searches</li>\n<li>Items you've selected before appear at the top, sorted by most recent first</li>\n</ul>\n",
+        "signature": "Seal.frecency_enable",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Seal.frecency_storage_path",
+        "def_gfm": "Seal.frecency_storage_path",
+        "desc": "Path to the JSON file where frecency data is stored",
+        "desc_gfm": "<p>Path to the JSON file where frecency data is stored</p>\n",
+        "doc": "Path to the JSON file where frecency data is stored\n\nNotes:\n * Defaults to `~/.hammerspoon/seal_frecency.json`",
+        "doc_gfm": "<p>Path to the JSON file where frecency data is stored</p>\n<p>Notes:</p>\n<ul>\n<li>Defaults to <code>~/.hammerspoon/seal_frecency.json</code></li>\n</ul>\n",
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "60",
+        "name": "frecency_storage_path",
+        "notes": [
+          " * Defaults to `~/.hammerspoon/seal_frecency.json`"
+        ],
+        "notes_gfm": "<ul>\n<li>Defaults to <code>~/.hammerspoon/seal_frecency.json</code></li>\n</ul>\n",
+        "signature": "Seal.frecency_storage_path",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
       {
         "def": "Seal.plugin_search_paths",
         "def_gfm": "Seal.plugin_search_paths",
@@ -18420,7 +18611,7 @@
         "doc_gfm": "<p>Binds hotkeys for Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>mapping - A table containing hotkey modifier/key details for the following (optional) items:</li>\n<li>show - This will cause Seal's UI to be shown</li>\n<li>toggle - This will cause Seal's UI to be shown or hidden depending on its current state</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "157",
+        "lineno": "337",
         "name": "bindHotkeys",
         "notes": [],
         "notes_gfm": "",
@@ -18437,6 +18628,120 @@
         "type": "Method"
       },
       {
+        "def": "Seal:calculateFrecencyScore(uuid, query)",
+        "def_gfm": "Seal:calculateFrecencyScore(uuid, query)",
+        "desc": "Calculate the recency score for a given item",
+        "desc_gfm": "<p>Calculate the recency score for a given item</p>\n",
+        "doc": "Calculate the recency score for a given item\n\nParameters:\n * uuid - The unique identifier of the item\n * query - The current query string (unused, kept for API compatibility)\n\nReturns:\n * The last_used timestamp (number), or 0 if no history exists",
+        "doc_gfm": "<p>Calculate the recency score for a given item</p>\n<p>Parameters:</p>\n<ul>\n<li>uuid - The unique identifier of the item</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The last_used timestamp (number), or 0 if no history exists</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "156",
+        "name": "calculateFrecencyScore",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * uuid - The unique identifier of the item",
+          " * query - The current query string (unused, kept for API compatibility)"
+        ],
+        "parameters_gfm": "<ul>\n<li>uuid - The unique identifier of the item</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n",
+        "returns": [
+          " * The last_used timestamp (number), or 0 if no history exists"
+        ],
+        "returns_gfm": "<ul>\n<li>The last_used timestamp (number), or 0 if no history exists</li>\n</ul>\n",
+        "signature": "Seal:calculateFrecencyScore(uuid, query)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Seal:clearFrecencyData()",
+        "def_gfm": "Seal:clearFrecencyData()",
+        "desc": "Clear all usage history (reset recency tracking)",
+        "desc_gfm": "<p>Clear all usage history (reset recency tracking)</p>\n",
+        "doc": "Clear all usage history (reset recency tracking)\n\nParameters:\n * None\n\nReturns:\n * The Seal object",
+        "doc_gfm": "<p>Clear all usage history (reset recency tracking)</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "211",
+        "name": "clearFrecencyData",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * None"
+        ],
+        "parameters_gfm": "<ul>\n<li>None</li>\n</ul>\n",
+        "returns": [
+          " * The Seal object"
+        ],
+        "returns_gfm": "<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "signature": "Seal:clearFrecencyData()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Seal.frecency_enable",
+        "def_gfm": "Seal.frecency_enable",
+        "desc": "Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).",
+        "desc_gfm": "<p>Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).</p>\n",
+        "doc": "Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).\n\nNotes:\n * Defaults to `true`\n * When enabled, Seal will track which results you select and prioritize them in future searches\n * Items you've selected before appear at the top, sorted by most recent first",
+        "doc_gfm": "<p>Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).</p>\n<p>Notes:</p>\n<ul>\n<li>Defaults to <code>true</code></li>\n<li>When enabled, Seal will track which results you select and prioritize them in future searches</li>\n<li>Items you've selected before appear at the top, sorted by most recent first</li>\n</ul>\n",
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "50",
+        "name": "frecency_enable",
+        "notes": [
+          " * Defaults to `true`",
+          " * When enabled, Seal will track which results you select and prioritize them in future searches",
+          " * Items you've selected before appear at the top, sorted by most recent first"
+        ],
+        "notes_gfm": "<ul>\n<li>Defaults to <code>true</code></li>\n<li>When enabled, Seal will track which results you select and prioritize them in future searches</li>\n<li>Items you've selected before appear at the top, sorted by most recent first</li>\n</ul>\n",
+        "signature": "Seal.frecency_enable",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Seal.frecency_storage_path",
+        "def_gfm": "Seal.frecency_storage_path",
+        "desc": "Path to the JSON file where frecency data is stored",
+        "desc_gfm": "<p>Path to the JSON file where frecency data is stored</p>\n",
+        "doc": "Path to the JSON file where frecency data is stored\n\nNotes:\n * Defaults to `~/.hammerspoon/seal_frecency.json`",
+        "doc_gfm": "<p>Path to the JSON file where frecency data is stored</p>\n<p>Notes:</p>\n<ul>\n<li>Defaults to <code>~/.hammerspoon/seal_frecency.json</code></li>\n</ul>\n",
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "60",
+        "name": "frecency_storage_path",
+        "notes": [
+          " * Defaults to `~/.hammerspoon/seal_frecency.json`"
+        ],
+        "notes_gfm": "<ul>\n<li>Defaults to <code>~/.hammerspoon/seal_frecency.json</code></li>\n</ul>\n",
+        "signature": "Seal.frecency_storage_path",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Seal:loadFrecencyData()",
+        "def_gfm": "Seal:loadFrecencyData()",
+        "desc": "Load frecency data from disk",
+        "desc_gfm": "<p>Load frecency data from disk</p>\n",
+        "doc": "Load frecency data from disk\n\nParameters:\n * None\n\nReturns:\n * The Seal object",
+        "doc_gfm": "<p>Load frecency data from disk</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "71",
+        "name": "loadFrecencyData",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * None"
+        ],
+        "parameters_gfm": "<ul>\n<li>None</li>\n</ul>\n",
+        "returns": [
+          " * The Seal object"
+        ],
+        "returns_gfm": "<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "signature": "Seal:loadFrecencyData()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
         "def": "Seal:loadPluginFromFile(plugin_name, file)",
         "def_gfm": "Seal:loadPluginFromFile(plugin_name, file)",
         "desc": "Loads a plugin from a given file",
@@ -18445,7 +18750,7 @@
         "doc_gfm": "<p>Loads a plugin from a given file</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin, without &quot;seal_&quot; at the beginning or &quot;.lua&quot; at the end</li>\n<li>file - the file where the plugin code is stored.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object if the plugin was successfully loaded, <code>nil</code> otherwise</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>You should normally use <code>Seal:loadPlugins()</code>. This method allows you to load plugins\nfrom non-standard locations and is mostly a development interface.</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "94",
+        "lineno": "271",
         "name": "loadPluginFromFile",
         "notes": [
           " * You should normally use `Seal:loadPlugins()`. This method allows you to load plugins",
@@ -18475,7 +18780,7 @@
         "doc_gfm": "<p>Loads a list of Seal plugins</p>\n<p>Parameters:</p>\n<ul>\n<li>plugins - A list containing the names of plugins to load</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>The plugins live inside the Seal.spoon directory</li>\n<li>The plugin names in the list, should not have <code>seal_</code> at the start, or <code>.lua</code> at the end</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "122",
+        "lineno": "299",
         "name": "loadPlugins",
         "notes": [
           " * The plugins live inside the Seal.spoon directory",
@@ -18528,6 +18833,32 @@
         "type": "Variable"
       },
       {
+        "def": "Seal:recordSelection(query, uuid)",
+        "def_gfm": "Seal:recordSelection(query, uuid)",
+        "desc": "Record a selection in the frecency database",
+        "desc_gfm": "<p>Record a selection in the frecency database</p>\n",
+        "doc": "Record a selection in the frecency database\n\nParameters:\n * query - The query string used when the selection was made (currently unused, kept for API compatibility)\n * uuid - The unique identifier of the selected item\n\nReturns:\n * The Seal object",
+        "doc_gfm": "<p>Record a selection in the frecency database</p>\n<p>Parameters:</p>\n<ul>\n<li>query - The query string used when the selection was made (currently unused, kept for API compatibility)</li>\n<li>uuid - The unique identifier of the selected item</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "123",
+        "name": "recordSelection",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * query - The query string used when the selection was made (currently unused, kept for API compatibility)",
+          " * uuid - The unique identifier of the selected item"
+        ],
+        "parameters_gfm": "<ul>\n<li>query - The query string used when the selection was made (currently unused, kept for API compatibility)</li>\n<li>uuid - The unique identifier of the selected item</li>\n</ul>\n",
+        "returns": [
+          " * The Seal object"
+        ],
+        "returns_gfm": "<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "signature": "Seal:recordSelection(query, uuid)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
         "def": "Seal:refreshAllCommands()",
         "def_gfm": "Seal:refreshAllCommands()",
         "desc": "Refresh the list of commands provided by all the currently loaded plugins.",
@@ -18536,7 +18867,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by all the currently loaded plugins.</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "75",
+        "lineno": "252",
         "name": "refreshAllCommands",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -18563,7 +18894,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by the given plugin.</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin. Should be the name as passed to <code>loadPlugins()</code> or <code>loadPluginFromFile</code>.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "50",
+        "lineno": "227",
         "name": "refreshCommandsForPlugin",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -18582,6 +18913,31 @@
         "type": "Method"
       },
       {
+        "def": "Seal:saveFrecencyData()",
+        "def_gfm": "Seal:saveFrecencyData()",
+        "desc": "Save frecency data to disk",
+        "desc_gfm": "<p>Save frecency data to disk</p>\n",
+        "doc": "Save frecency data to disk\n\nParameters:\n * None\n\nReturns:\n * The Seal object",
+        "doc_gfm": "<p>Save frecency data to disk</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "98",
+        "name": "saveFrecencyData",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * None"
+        ],
+        "parameters_gfm": "<ul>\n<li>None</li>\n</ul>\n",
+        "returns": [
+          " * The Seal object"
+        ],
+        "returns_gfm": "<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "signature": "Seal:saveFrecencyData()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
         "def": "Seal:show(query)",
         "def_gfm": "Seal:show(query)",
         "desc": "Shows the Seal UI",
@@ -18590,7 +18946,7 @@
         "doc_gfm": "<p>Shows the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This may be useful if you wish to show Seal in response to something other than its hotkey</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "234",
+        "lineno": "414",
         "name": "show",
         "notes": [
           " * This may be useful if you wish to show Seal in response to something other than its hotkey"
@@ -18609,6 +18965,32 @@
         "type": "Method"
       },
       {
+        "def": "Seal:sortChoicesByFrecency(choices, query)",
+        "def_gfm": "Seal:sortChoicesByFrecency(choices, query)",
+        "desc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)",
+        "desc_gfm": "<p>Sort a list of choices by recency (items used before appear first, sorted by most recent)</p>\n",
+        "doc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)\n\nParameters:\n * choices - A table of choice items\n * query - The current query string (unused, kept for API compatibility)\n\nReturns:\n * The sorted choices table",
+        "doc_gfm": "<p>Sort a list of choices by recency (items used before appear first, sorted by most recent)</p>\n<p>Parameters:</p>\n<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The sorted choices table</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "179",
+        "name": "sortChoicesByFrecency",
+        "notes": [],
+        "notes_gfm": "",
+        "parameters": [
+          " * choices - A table of choice items",
+          " * query - The current query string (unused, kept for API compatibility)"
+        ],
+        "parameters_gfm": "<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n",
+        "returns": [
+          " * The sorted choices table"
+        ],
+        "returns_gfm": "<ul>\n<li>The sorted choices table</li>\n</ul>\n",
+        "signature": "Seal:sortChoicesByFrecency(choices, query)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
         "def": "Seal:start()",
         "def_gfm": "Seal:start()",
         "desc": "Starts Seal",
@@ -18617,7 +18999,7 @@
         "doc_gfm": "<p>Starts Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "190",
+        "lineno": "370",
         "name": "start",
         "notes": [],
         "notes_gfm": "",
@@ -18642,7 +19024,7 @@
         "doc_gfm": "<p>Stops Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "210",
+        "lineno": "390",
         "name": "stop",
         "notes": [
           " * Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)"
@@ -18669,7 +19051,7 @@
         "doc_gfm": "<p>Shows or hides the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "252",
+        "lineno": "432",
         "name": "toggle",
         "notes": [],
         "notes_gfm": "",
@@ -19273,7 +19655,7 @@
         "doc_gfm": "<p>Gets or sets the current providers table</p>\n<p>Parameters:</p>\n<ul>\n<li>aTable - An optional table of providers, which must contain the following keys:<ul>\n<li>name - A string naming the provider, which will be shown in the Seal results</li>\n<li>url - A string containing the URL to insert the user's query into. This should contain one and only one <code>%s</code></li>\n</ul>\n</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>Either a table of current providers, if no parameter was passed, or nothing if a parmameter was passed.</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>An example table might look like:</li>\n</ul>\n<div class=\"highlight\"><pre><span></span><span class=\"p\">{</span>\n  <span class=\"n\">rhbz</span> <span class=\"o\">=</span> <span class=\"p\">{</span> <span class=\"n\">name</span> <span class=\"o\">=</span> <span class=\"s2\">&quot;Red Hat Bugzilla&quot;</span><span class=\"p\">,</span> <span class=\"n\">url</span> <span class=\"o\">=</span> <span class=\"s2\">&quot;https://bugzilla.redhat.com/show_bug.cgi?id=%s&quot;</span><span class=\"p\">,</span> <span class=\"p\">},</span>\n  <span class=\"n\">lp</span> <span class=\"o\">=</span> <span class=\"p\">{</span> <span class=\"n\">name</span> <span class=\"o\">=</span> <span class=\"s2\">&quot;Launchpad Bug&quot;</span><span class=\"p\">,</span> <span class=\"n\">url</span> <span class=\"o\">=</span> <span class=\"s2\">&quot;https://launchpad.net/bugs/%s&quot;</span><span class=\"p\">,</span> <span class=\"p\">},</span>\n<span class=\"p\">}</span>\n</pre></div>\n",
         "examples": [],
         "file": "Source/Seal.spoon/seal_urlformats.lua",
-        "lineno": "97",
+        "lineno": "99",
         "name": "providersTable",
         "notes": [
           " * An example table might look like:",
@@ -19313,7 +19695,7 @@
         "doc_gfm": "<p>Gets or sets the current providers table</p>\n<p>Parameters:</p>\n<ul>\n<li>aTable - An optional table of providers, which must contain the following keys:<ul>\n<li>name - A string naming the provider, which will be shown in the Seal results</li>\n<li>url - A string containing the URL to insert the user's query into. This should contain one and only one <code>%s</code></li>\n</ul>\n</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>Either a table of current providers, if no parameter was passed, or nothing if a parmameter was passed.</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>An example table might look like:</li>\n</ul>\n<div class=\"highlight\"><pre><span></span><span class=\"p\">{</span>\n  <span class=\"n\">rhbz</span> <span class=\"o\">=</span> <span class=\"p\">{</span> <span class=\"n\">name</span> <span class=\"o\">=</span> <span class=\"s2\">&quot;Red Hat Bugzilla&quot;</span><span class=\"p\">,</span> <span class=\"n\">url</span> <span class=\"o\">=</span> <span class=\"s2\">&quot;https://bugzilla.redhat.com/show_bug.cgi?id=%s&quot;</span><span class=\"p\">,</span> <span class=\"p\">},</span>\n  <span class=\"n\">lp</span> <span class=\"o\">=</span> <span class=\"p\">{</span> <span class=\"n\">name</span> <span class=\"o\">=</span> <span class=\"s2\">&quot;Launchpad Bug&quot;</span><span class=\"p\">,</span> <span class=\"n\">url</span> <span class=\"o\">=</span> <span class=\"s2\">&quot;https://launchpad.net/bugs/%s&quot;</span><span class=\"p\">,</span> <span class=\"p\">},</span>\n<span class=\"p\">}</span>\n</pre></div>\n",
         "examples": [],
         "file": "Source/Seal.spoon/seal_urlformats.lua",
-        "lineno": "97",
+        "lineno": "99",
         "name": "providersTable",
         "notes": [
           " * An example table might look like:",
