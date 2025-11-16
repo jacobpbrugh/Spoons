@@ -171,6 +171,7 @@ end
 function obj:asyncUpdateAllRepos()
    obj.logger.i("Starting async update of all Spoon repositories...")
    for k,v in pairs(self.repos) do
+      obj.logger.i("Updating repository '%s'...", k)
       self:asyncUpdateRepo(k)
    end
 end
@@ -191,6 +192,7 @@ end
 function obj:updateAllRepos()
    obj.logger.i("Starting update of all Spoon repositories...")
    for k,v in pairs(self.repos) do
+      obj.logger.i("Updating repository '%s'...", k)
       self:updateRepo(k)
    end
 end
