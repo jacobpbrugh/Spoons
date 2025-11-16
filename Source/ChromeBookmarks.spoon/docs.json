@@ -1,0 +1,178 @@
+[
+  {
+    "Command": [],
+    "Constant": [],
+    "Constructor": [],
+    "Deprecated": [],
+    "Field": [],
+    "Function": [],
+    "Method": [
+      {
+        "def": "ChromeBookmarks:bindToSeal(seal)",
+        "desc": "Binds the Chrome bookmarks plugin to a running Seal instance",
+        "doc": "Binds the Chrome bookmarks plugin to a running Seal instance\n\nParameters:\n * seal - A running Seal spoon instance (e.g., spoon.Seal)\n\nReturns:\n * The ChromeBookmarks object for method chaining\n\nNotes:\n * This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings\n * You must call this after configuring the Spoon's variables (keyword, profiles, etc.)\n * The plugin will automatically start indexing bookmarks when Seal starts",
+        "examples": [],
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "64",
+        "name": "bindToSeal",
+        "notes": [
+          " * This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings",
+          " * You must call this after configuring the Spoon's variables (keyword, profiles, etc.)",
+          " * The plugin will automatically start indexing bookmarks when Seal starts"
+        ],
+        "parameters": [
+          " * seal - A running Seal spoon instance (e.g., spoon.Seal)"
+        ],
+        "returns": [
+          " * The ChromeBookmarks object for method chaining"
+        ],
+        "signature": "ChromeBookmarks:bindToSeal(seal)",
+        "stripped_doc": "",
+        "type": "Method"
+      }
+    ],
+    "Variable": [
+      {
+        "def": "ChromeBookmarks.keyword",
+        "desc": "The keyword to trigger Chrome bookmarks search in Seal. Default: \"cb\"",
+        "doc": "The keyword to trigger Chrome bookmarks search in Seal. Default: \"cb\"",
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "32",
+        "name": "keyword",
+        "signature": "ChromeBookmarks.keyword",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "ChromeBookmarks.logLevel",
+        "desc": "Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)",
+        "doc": "Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)",
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "52",
+        "name": "logLevel",
+        "signature": "ChromeBookmarks.logLevel",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "ChromeBookmarks.maxResults",
+        "desc": "Maximum number of search results to display. Default: 200",
+        "doc": "Maximum number of search results to display. Default: 200",
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "42",
+        "name": "maxResults",
+        "signature": "ChromeBookmarks.maxResults",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "ChromeBookmarks.openBehavior",
+        "desc": "How to open bookmarks. \"chrome\" opens in Chrome, \"default\" uses system default browser. Default: \"chrome\"",
+        "doc": "How to open bookmarks. \"chrome\" opens in Chrome, \"default\" uses system default browser. Default: \"chrome\"",
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "47",
+        "name": "openBehavior",
+        "signature": "ChromeBookmarks.openBehavior",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "ChromeBookmarks.profiles",
+        "desc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
+        "doc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "37",
+        "name": "profiles",
+        "signature": "ChromeBookmarks.profiles",
+        "stripped_doc": "",
+        "type": "Variable"
+      }
+    ],
+    "desc": "Search Google Chrome bookmarks via Seal",
+    "doc": "Search Google Chrome bookmarks via Seal\n\nDownload: [https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip](https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip)\n\nThis Spoon provides a Seal plugin to search and open Google Chrome bookmarks.\nIt automatically indexes bookmarks from all Chrome profiles and provides fast fuzzy searching.\n\nExample usage:\n```\nhs.loadSpoon(\"Seal\")\nspoon.Seal:start()\nhs.loadSpoon(\"ChromeBookmarks\")\nspoon.ChromeBookmarks.profiles = \"auto\"           -- or { \"Default\", \"Profile 1\" }\nspoon.ChromeBookmarks.keyword = \"cb\"              -- type: \"cb <query>\"\nspoon.ChromeBookmarks.openBehavior = \"chrome\"     -- \"chrome\" or \"default\"\nspoon.ChromeBookmarks.maxResults = 200\nspoon.ChromeBookmarks:bindToSeal(spoon.Seal)\n```",
+    "items": [
+      {
+        "def": "ChromeBookmarks:bindToSeal(seal)",
+        "desc": "Binds the Chrome bookmarks plugin to a running Seal instance",
+        "doc": "Binds the Chrome bookmarks plugin to a running Seal instance\n\nParameters:\n * seal - A running Seal spoon instance (e.g., spoon.Seal)\n\nReturns:\n * The ChromeBookmarks object for method chaining\n\nNotes:\n * This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings\n * You must call this after configuring the Spoon's variables (keyword, profiles, etc.)\n * The plugin will automatically start indexing bookmarks when Seal starts",
+        "examples": [],
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "64",
+        "name": "bindToSeal",
+        "notes": [
+          " * This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings",
+          " * You must call this after configuring the Spoon's variables (keyword, profiles, etc.)",
+          " * The plugin will automatically start indexing bookmarks when Seal starts"
+        ],
+        "parameters": [
+          " * seal - A running Seal spoon instance (e.g., spoon.Seal)"
+        ],
+        "returns": [
+          " * The ChromeBookmarks object for method chaining"
+        ],
+        "signature": "ChromeBookmarks:bindToSeal(seal)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "ChromeBookmarks.keyword",
+        "desc": "The keyword to trigger Chrome bookmarks search in Seal. Default: \"cb\"",
+        "doc": "The keyword to trigger Chrome bookmarks search in Seal. Default: \"cb\"",
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "32",
+        "name": "keyword",
+        "signature": "ChromeBookmarks.keyword",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "ChromeBookmarks.logLevel",
+        "desc": "Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)",
+        "doc": "Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)",
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "52",
+        "name": "logLevel",
+        "signature": "ChromeBookmarks.logLevel",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "ChromeBookmarks.maxResults",
+        "desc": "Maximum number of search results to display. Default: 200",
+        "doc": "Maximum number of search results to display. Default: 200",
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "42",
+        "name": "maxResults",
+        "signature": "ChromeBookmarks.maxResults",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "ChromeBookmarks.openBehavior",
+        "desc": "How to open bookmarks. \"chrome\" opens in Chrome, \"default\" uses system default browser. Default: \"chrome\"",
+        "doc": "How to open bookmarks. \"chrome\" opens in Chrome, \"default\" uses system default browser. Default: \"chrome\"",
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "47",
+        "name": "openBehavior",
+        "signature": "ChromeBookmarks.openBehavior",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "ChromeBookmarks.profiles",
+        "desc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
+        "doc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
+        "file": "Source/ChromeBookmarks.spoon//init.lua",
+        "lineno": "37",
+        "name": "profiles",
+        "signature": "ChromeBookmarks.profiles",
+        "stripped_doc": "",
+        "type": "Variable"
+      }
+    ],
+    "name": "ChromeBookmarks",
+    "stripped_doc": "\nDownload: [https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip](https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip)\n\nThis Spoon provides a Seal plugin to search and open Google Chrome bookmarks.\nIt automatically indexes bookmarks from all Chrome profiles and provides fast fuzzy searching.\n\nExample usage:\n```\nhs.loadSpoon(\"Seal\")\nspoon.Seal:start()\nhs.loadSpoon(\"ChromeBookmarks\")\nspoon.ChromeBookmarks.profiles = \"auto\"           -- or { \"Default\", \"Profile 1\" }\nspoon.ChromeBookmarks.keyword = \"cb\"              -- type: \"cb <query>\"\nspoon.ChromeBookmarks.openBehavior = \"chrome\"     -- \"chrome\" or \"default\"\nspoon.ChromeBookmarks.maxResults = 200\nspoon.ChromeBookmarks:bindToSeal(spoon.Seal)\n```",
+    "submodules": [],
+    "type": "Module"
+  }
+]
