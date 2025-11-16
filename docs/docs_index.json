@@ -430,47 +430,6 @@
     "type": "Method"
   },
   {
-    "desc": "Search Google Chrome bookmarks via Seal",
-    "name": "ChromeBookmarks",
-    "type": "Module"
-  },
-  {
-    "desc": "The keyword to trigger Chrome bookmarks search in Seal. Default: \"cb\"",
-    "module": "ChromeBookmarks",
-    "name": "keyword",
-    "type": "Variable"
-  },
-  {
-    "desc": "Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)",
-    "module": "ChromeBookmarks",
-    "name": "logLevel",
-    "type": "Variable"
-  },
-  {
-    "desc": "Maximum number of search results to display. Default: 200",
-    "module": "ChromeBookmarks",
-    "name": "maxResults",
-    "type": "Variable"
-  },
-  {
-    "desc": "How to open bookmarks. \"chrome\" opens in Chrome, \"default\" uses system default browser. Default: \"chrome\"",
-    "module": "ChromeBookmarks",
-    "name": "openBehavior",
-    "type": "Variable"
-  },
-  {
-    "desc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
-    "module": "ChromeBookmarks",
-    "name": "profiles",
-    "type": "Variable"
-  },
-  {
-    "desc": "Binds the Chrome bookmarks plugin to a running Seal instance",
-    "module": "ChromeBookmarks",
-    "name": "bindToSeal",
-    "type": "Method"
-  },
-  {
     "desc": "A circleclock inset into the desktop",
     "name": "CircleClock",
     "type": "Module"
@@ -2818,6 +2777,23 @@
     "module": "Seal.plugins.apps",
     "name": "stop",
     "type": "Method"
+  },
+  {
+    "desc": "",
+    "name": "Seal.plugins.chrome_bookmarks",
+    "type": "Module"
+  },
+  {
+    "desc": "If `true` (default), bookmarks are always opened with Chrome. If `false`, they are opened with the default browser.",
+    "module": "Seal.plugins.chrome_bookmarks",
+    "name": "always_open_with_chrome",
+    "type": "Variable"
+  },
+  {
+    "desc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
+    "module": "Seal.plugins.chrome_bookmarks",
+    "name": "profiles",
+    "type": "Variable"
   },
   {
     "desc": "A plugin to add file search capabilities, making Seal act as a spotlight file search",

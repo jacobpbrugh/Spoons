@@ -3168,226 +3168,6 @@
     "Deprecated": [],
     "Field": [],
     "Function": [],
-    "Method": [
-      {
-        "def": "ChromeBookmarks:bindToSeal(seal)",
-        "def_gfm": "ChromeBookmarks:bindToSeal(seal)",
-        "desc": "Binds the Chrome bookmarks plugin to a running Seal instance",
-        "desc_gfm": "<p>Binds the Chrome bookmarks plugin to a running Seal instance</p>\n",
-        "doc": "Binds the Chrome bookmarks plugin to a running Seal instance\n\nParameters:\n * seal - A running Seal spoon instance (e.g., spoon.Seal)\n\nReturns:\n * The ChromeBookmarks object for method chaining\n\nNotes:\n * This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings\n * You must call this after configuring the Spoon's variables (keyword, profiles, etc.)\n * The plugin will automatically start indexing bookmarks when Seal starts",
-        "doc_gfm": "<p>Binds the Chrome bookmarks plugin to a running Seal instance</p>\n<p>Parameters:</p>\n<ul>\n<li>seal - A running Seal spoon instance (e.g., spoon.Seal)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The ChromeBookmarks object for method chaining</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings</li>\n<li>You must call this after configuring the Spoon's variables (keyword, profiles, etc.)</li>\n<li>The plugin will automatically start indexing bookmarks when Seal starts</li>\n</ul>\n",
-        "examples": [],
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "64",
-        "name": "bindToSeal",
-        "notes": [
-          " * This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings",
-          " * You must call this after configuring the Spoon's variables (keyword, profiles, etc.)",
-          " * The plugin will automatically start indexing bookmarks when Seal starts"
-        ],
-        "notes_gfm": "<ul>\n<li>This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings</li>\n<li>You must call this after configuring the Spoon's variables (keyword, profiles, etc.)</li>\n<li>The plugin will automatically start indexing bookmarks when Seal starts</li>\n</ul>\n",
-        "parameters": [
-          " * seal - A running Seal spoon instance (e.g., spoon.Seal)"
-        ],
-        "parameters_gfm": "<ul>\n<li>seal - A running Seal spoon instance (e.g., spoon.Seal)</li>\n</ul>\n",
-        "returns": [
-          " * The ChromeBookmarks object for method chaining"
-        ],
-        "returns_gfm": "<ul>\n<li>The ChromeBookmarks object for method chaining</li>\n</ul>\n",
-        "signature": "ChromeBookmarks:bindToSeal(seal)",
-        "stripped_doc": "",
-        "type": "Method"
-      }
-    ],
-    "Variable": [
-      {
-        "def": "ChromeBookmarks.keyword",
-        "def_gfm": "ChromeBookmarks.keyword",
-        "desc": "The keyword to trigger Chrome bookmarks search in Seal. Default: \"cb\"",
-        "desc_gfm": "<p>The keyword to trigger Chrome bookmarks search in Seal. Default: &quot;cb&quot;</p>\n",
-        "doc": "The keyword to trigger Chrome bookmarks search in Seal. Default: \"cb\"",
-        "doc_gfm": "<p>The keyword to trigger Chrome bookmarks search in Seal. Default: &quot;cb&quot;</p>\n",
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "32",
-        "name": "keyword",
-        "signature": "ChromeBookmarks.keyword",
-        "stripped_doc": "",
-        "type": "Variable"
-      },
-      {
-        "def": "ChromeBookmarks.logLevel",
-        "def_gfm": "ChromeBookmarks.logLevel",
-        "desc": "Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)",
-        "desc_gfm": "<p>Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)</p>\n",
-        "doc": "Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)",
-        "doc_gfm": "<p>Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)</p>\n",
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "52",
-        "name": "logLevel",
-        "signature": "ChromeBookmarks.logLevel",
-        "stripped_doc": "",
-        "type": "Variable"
-      },
-      {
-        "def": "ChromeBookmarks.maxResults",
-        "def_gfm": "ChromeBookmarks.maxResults",
-        "desc": "Maximum number of search results to display. Default: 200",
-        "desc_gfm": "<p>Maximum number of search results to display. Default: 200</p>\n",
-        "doc": "Maximum number of search results to display. Default: 200",
-        "doc_gfm": "<p>Maximum number of search results to display. Default: 200</p>\n",
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "42",
-        "name": "maxResults",
-        "signature": "ChromeBookmarks.maxResults",
-        "stripped_doc": "",
-        "type": "Variable"
-      },
-      {
-        "def": "ChromeBookmarks.openBehavior",
-        "def_gfm": "ChromeBookmarks.openBehavior",
-        "desc": "How to open bookmarks. \"chrome\" opens in Chrome, \"default\" uses system default browser. Default: \"chrome\"",
-        "desc_gfm": "<p>How to open bookmarks. &quot;chrome&quot; opens in Chrome, &quot;default&quot; uses system default browser. Default: &quot;chrome&quot;</p>\n",
-        "doc": "How to open bookmarks. \"chrome\" opens in Chrome, \"default\" uses system default browser. Default: \"chrome\"",
-        "doc_gfm": "<p>How to open bookmarks. &quot;chrome&quot; opens in Chrome, &quot;default&quot; uses system default browser. Default: &quot;chrome&quot;</p>\n",
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "47",
-        "name": "openBehavior",
-        "signature": "ChromeBookmarks.openBehavior",
-        "stripped_doc": "",
-        "type": "Variable"
-      },
-      {
-        "def": "ChromeBookmarks.profiles",
-        "def_gfm": "ChromeBookmarks.profiles",
-        "desc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
-        "desc_gfm": "<p>Which Chrome profiles to index. Can be &quot;auto&quot; to auto-detect all profiles, or a table like { &quot;Default&quot;, &quot;Profile 1&quot; }. Default: &quot;auto&quot;</p>\n",
-        "doc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
-        "doc_gfm": "<p>Which Chrome profiles to index. Can be &quot;auto&quot; to auto-detect all profiles, or a table like { &quot;Default&quot;, &quot;Profile 1&quot; }. Default: &quot;auto&quot;</p>\n",
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "37",
-        "name": "profiles",
-        "signature": "ChromeBookmarks.profiles",
-        "stripped_doc": "",
-        "type": "Variable"
-      }
-    ],
-    "desc": "Search Google Chrome bookmarks via Seal",
-    "desc_gfm": "<p>Search Google Chrome bookmarks via Seal</p>\n",
-    "doc": "Search Google Chrome bookmarks via Seal\n\nDownload: [https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip](https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip)\n\nThis Spoon provides a Seal plugin to search and open Google Chrome bookmarks.\nIt automatically indexes bookmarks from all Chrome profiles and provides fast fuzzy searching.\n\nExample usage:\n```\nhs.loadSpoon(\"Seal\")\nspoon.Seal:start()\nhs.loadSpoon(\"ChromeBookmarks\")\nspoon.ChromeBookmarks.profiles = \"auto\"           -- or { \"Default\", \"Profile 1\" }\nspoon.ChromeBookmarks.keyword = \"cb\"              -- type: \"cb <query>\"\nspoon.ChromeBookmarks.openBehavior = \"chrome\"     -- \"chrome\" or \"default\"\nspoon.ChromeBookmarks.maxResults = 200\nspoon.ChromeBookmarks:bindToSeal(spoon.Seal)\n```",
-    "doc_gfm": "<p>Search Google Chrome bookmarks via Seal</p>\n<p>Download: <a href=\"https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip\">https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip</a></p>\n<p>This Spoon provides a Seal plugin to search and open Google Chrome bookmarks.\nIt automatically indexes bookmarks from all Chrome profiles and provides fast fuzzy searching.</p>\n<p>Example usage:</p>\n\n<pre><code>hs.loadSpoon(&quot;Seal&quot;)\nspoon.Seal:start()\nhs.loadSpoon(&quot;ChromeBookmarks&quot;)\nspoon.ChromeBookmarks.profiles = &quot;auto&quot;           -- or { &quot;Default&quot;, &quot;Profile 1&quot; }\nspoon.ChromeBookmarks.keyword = &quot;cb&quot;              -- type: &quot;cb &lt;query&gt;&quot;\nspoon.ChromeBookmarks.openBehavior = &quot;chrome&quot;     -- &quot;chrome&quot; or &quot;default&quot;\nspoon.ChromeBookmarks.maxResults = 200\nspoon.ChromeBookmarks:bindToSeal(spoon.Seal)\n</code></pre>\n",
-    "items": [
-      {
-        "def": "ChromeBookmarks:bindToSeal(seal)",
-        "def_gfm": "ChromeBookmarks:bindToSeal(seal)",
-        "desc": "Binds the Chrome bookmarks plugin to a running Seal instance",
-        "desc_gfm": "<p>Binds the Chrome bookmarks plugin to a running Seal instance</p>\n",
-        "doc": "Binds the Chrome bookmarks plugin to a running Seal instance\n\nParameters:\n * seal - A running Seal spoon instance (e.g., spoon.Seal)\n\nReturns:\n * The ChromeBookmarks object for method chaining\n\nNotes:\n * This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings\n * You must call this after configuring the Spoon's variables (keyword, profiles, etc.)\n * The plugin will automatically start indexing bookmarks when Seal starts",
-        "doc_gfm": "<p>Binds the Chrome bookmarks plugin to a running Seal instance</p>\n<p>Parameters:</p>\n<ul>\n<li>seal - A running Seal spoon instance (e.g., spoon.Seal)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The ChromeBookmarks object for method chaining</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings</li>\n<li>You must call this after configuring the Spoon's variables (keyword, profiles, etc.)</li>\n<li>The plugin will automatically start indexing bookmarks when Seal starts</li>\n</ul>\n",
-        "examples": [],
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "64",
-        "name": "bindToSeal",
-        "notes": [
-          " * This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings",
-          " * You must call this after configuring the Spoon's variables (keyword, profiles, etc.)",
-          " * The plugin will automatically start indexing bookmarks when Seal starts"
-        ],
-        "notes_gfm": "<ul>\n<li>This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings</li>\n<li>You must call this after configuring the Spoon's variables (keyword, profiles, etc.)</li>\n<li>The plugin will automatically start indexing bookmarks when Seal starts</li>\n</ul>\n",
-        "parameters": [
-          " * seal - A running Seal spoon instance (e.g., spoon.Seal)"
-        ],
-        "parameters_gfm": "<ul>\n<li>seal - A running Seal spoon instance (e.g., spoon.Seal)</li>\n</ul>\n",
-        "returns": [
-          " * The ChromeBookmarks object for method chaining"
-        ],
-        "returns_gfm": "<ul>\n<li>The ChromeBookmarks object for method chaining</li>\n</ul>\n",
-        "signature": "ChromeBookmarks:bindToSeal(seal)",
-        "stripped_doc": "",
-        "type": "Method"
-      },
-      {
-        "def": "ChromeBookmarks.keyword",
-        "def_gfm": "ChromeBookmarks.keyword",
-        "desc": "The keyword to trigger Chrome bookmarks search in Seal. Default: \"cb\"",
-        "desc_gfm": "<p>The keyword to trigger Chrome bookmarks search in Seal. Default: &quot;cb&quot;</p>\n",
-        "doc": "The keyword to trigger Chrome bookmarks search in Seal. Default: \"cb\"",
-        "doc_gfm": "<p>The keyword to trigger Chrome bookmarks search in Seal. Default: &quot;cb&quot;</p>\n",
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "32",
-        "name": "keyword",
-        "signature": "ChromeBookmarks.keyword",
-        "stripped_doc": "",
-        "type": "Variable"
-      },
-      {
-        "def": "ChromeBookmarks.logLevel",
-        "def_gfm": "ChromeBookmarks.logLevel",
-        "desc": "Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)",
-        "desc_gfm": "<p>Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)</p>\n",
-        "doc": "Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)",
-        "doc_gfm": "<p>Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)</p>\n",
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "52",
-        "name": "logLevel",
-        "signature": "ChromeBookmarks.logLevel",
-        "stripped_doc": "",
-        "type": "Variable"
-      },
-      {
-        "def": "ChromeBookmarks.maxResults",
-        "def_gfm": "ChromeBookmarks.maxResults",
-        "desc": "Maximum number of search results to display. Default: 200",
-        "desc_gfm": "<p>Maximum number of search results to display. Default: 200</p>\n",
-        "doc": "Maximum number of search results to display. Default: 200",
-        "doc_gfm": "<p>Maximum number of search results to display. Default: 200</p>\n",
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "42",
-        "name": "maxResults",
-        "signature": "ChromeBookmarks.maxResults",
-        "stripped_doc": "",
-        "type": "Variable"
-      },
-      {
-        "def": "ChromeBookmarks.openBehavior",
-        "def_gfm": "ChromeBookmarks.openBehavior",
-        "desc": "How to open bookmarks. \"chrome\" opens in Chrome, \"default\" uses system default browser. Default: \"chrome\"",
-        "desc_gfm": "<p>How to open bookmarks. &quot;chrome&quot; opens in Chrome, &quot;default&quot; uses system default browser. Default: &quot;chrome&quot;</p>\n",
-        "doc": "How to open bookmarks. \"chrome\" opens in Chrome, \"default\" uses system default browser. Default: \"chrome\"",
-        "doc_gfm": "<p>How to open bookmarks. &quot;chrome&quot; opens in Chrome, &quot;default&quot; uses system default browser. Default: &quot;chrome&quot;</p>\n",
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "47",
-        "name": "openBehavior",
-        "signature": "ChromeBookmarks.openBehavior",
-        "stripped_doc": "",
-        "type": "Variable"
-      },
-      {
-        "def": "ChromeBookmarks.profiles",
-        "def_gfm": "ChromeBookmarks.profiles",
-        "desc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
-        "desc_gfm": "<p>Which Chrome profiles to index. Can be &quot;auto&quot; to auto-detect all profiles, or a table like { &quot;Default&quot;, &quot;Profile 1&quot; }. Default: &quot;auto&quot;</p>\n",
-        "doc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
-        "doc_gfm": "<p>Which Chrome profiles to index. Can be &quot;auto&quot; to auto-detect all profiles, or a table like { &quot;Default&quot;, &quot;Profile 1&quot; }. Default: &quot;auto&quot;</p>\n",
-        "file": "Source/ChromeBookmarks.spoon/init.lua",
-        "lineno": "37",
-        "name": "profiles",
-        "signature": "ChromeBookmarks.profiles",
-        "stripped_doc": "",
-        "type": "Variable"
-      }
-    ],
-    "name": "ChromeBookmarks",
-    "stripped_doc": "\nDownload: [https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip](https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip)\n\nThis Spoon provides a Seal plugin to search and open Google Chrome bookmarks.\nIt automatically indexes bookmarks from all Chrome profiles and provides fast fuzzy searching.\n\nExample usage:\n```\nhs.loadSpoon(\"Seal\")\nspoon.Seal:start()\nhs.loadSpoon(\"ChromeBookmarks\")\nspoon.ChromeBookmarks.profiles = \"auto\"           -- or { \"Default\", \"Profile 1\" }\nspoon.ChromeBookmarks.keyword = \"cb\"              -- type: \"cb <query>\"\nspoon.ChromeBookmarks.openBehavior = \"chrome\"     -- \"chrome\" or \"default\"\nspoon.ChromeBookmarks.maxResults = 200\nspoon.ChromeBookmarks:bindToSeal(spoon.Seal)\n```",
-    "submodules": [],
-    "type": "Module"
-  },
-  {
-    "Command": [],
-    "Constant": [],
-    "Constructor": [],
-    "Deprecated": [],
-    "Field": [],
-    "Function": [],
     "Method": [],
     "Variable": [],
     "desc": "A circleclock inset into the desktop",
@@ -18358,7 +18138,7 @@
         "doc_gfm": "<p>Binds hotkeys for Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>mapping - A table containing hotkey modifier/key details for the following (optional) items:</li>\n<li>show - This will cause Seal's UI to be shown</li>\n<li>toggle - This will cause Seal's UI to be shown or hidden depending on its current state</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "337",
+        "lineno": "338",
         "name": "bindHotkeys",
         "notes": [],
         "notes_gfm": "",
@@ -18383,7 +18163,7 @@
         "doc_gfm": "<p>Calculate the recency score for a given item</p>\n<p>Parameters:</p>\n<ul>\n<li>uuid - The unique identifier of the item</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The last_used timestamp (number), or 0 if no history exists</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "156",
+        "lineno": "157",
         "name": "calculateFrecencyScore",
         "notes": [],
         "notes_gfm": "",
@@ -18409,7 +18189,7 @@
         "doc_gfm": "<p>Clear all usage history (reset recency tracking)</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "211",
+        "lineno": "212",
         "name": "clearFrecencyData",
         "notes": [],
         "notes_gfm": "",
@@ -18434,7 +18214,7 @@
         "doc_gfm": "<p>Load frecency data from disk</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "71",
+        "lineno": "72",
         "name": "loadFrecencyData",
         "notes": [],
         "notes_gfm": "",
@@ -18459,7 +18239,7 @@
         "doc_gfm": "<p>Loads a plugin from a given file</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin, without &quot;seal_&quot; at the beginning or &quot;.lua&quot; at the end</li>\n<li>file - the file where the plugin code is stored.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object if the plugin was successfully loaded, <code>nil</code> otherwise</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>You should normally use <code>Seal:loadPlugins()</code>. This method allows you to load plugins\nfrom non-standard locations and is mostly a development interface.</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "271",
+        "lineno": "272",
         "name": "loadPluginFromFile",
         "notes": [
           " * You should normally use `Seal:loadPlugins()`. This method allows you to load plugins",
@@ -18489,7 +18269,7 @@
         "doc_gfm": "<p>Loads a list of Seal plugins</p>\n<p>Parameters:</p>\n<ul>\n<li>plugins - A list containing the names of plugins to load</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>The plugins live inside the Seal.spoon directory</li>\n<li>The plugin names in the list, should not have <code>seal_</code> at the start, or <code>.lua</code> at the end</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "299",
+        "lineno": "300",
         "name": "loadPlugins",
         "notes": [
           " * The plugins live inside the Seal.spoon directory",
@@ -18518,7 +18298,7 @@
         "doc_gfm": "<p>Record a selection in the frecency database</p>\n<p>Parameters:</p>\n<ul>\n<li>query - The query string used when the selection was made (currently unused, kept for API compatibility)</li>\n<li>uuid - The unique identifier of the selected item</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "123",
+        "lineno": "124",
         "name": "recordSelection",
         "notes": [],
         "notes_gfm": "",
@@ -18544,7 +18324,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by all the currently loaded plugins.</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "252",
+        "lineno": "253",
         "name": "refreshAllCommands",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -18571,7 +18351,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by the given plugin.</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin. Should be the name as passed to <code>loadPlugins()</code> or <code>loadPluginFromFile</code>.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "227",
+        "lineno": "228",
         "name": "refreshCommandsForPlugin",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -18598,7 +18378,7 @@
         "doc_gfm": "<p>Save frecency data to disk</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "98",
+        "lineno": "99",
         "name": "saveFrecencyData",
         "notes": [],
         "notes_gfm": "",
@@ -18623,7 +18403,7 @@
         "doc_gfm": "<p>Shows the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This may be useful if you wish to show Seal in response to something other than its hotkey</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "414",
+        "lineno": "415",
         "name": "show",
         "notes": [
           " * This may be useful if you wish to show Seal in response to something other than its hotkey"
@@ -18650,7 +18430,7 @@
         "doc_gfm": "<p>Sort a list of choices by recency (items used before appear first, sorted by most recent)</p>\n<p>Parameters:</p>\n<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The sorted choices table</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "179",
+        "lineno": "180",
         "name": "sortChoicesByFrecency",
         "notes": [],
         "notes_gfm": "",
@@ -18676,7 +18456,7 @@
         "doc_gfm": "<p>Starts Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "370",
+        "lineno": "371",
         "name": "start",
         "notes": [],
         "notes_gfm": "",
@@ -18701,7 +18481,7 @@
         "doc_gfm": "<p>Stops Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "390",
+        "lineno": "391",
         "name": "stop",
         "notes": [
           " * Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)"
@@ -18728,7 +18508,7 @@
         "doc_gfm": "<p>Shows or hides the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "432",
+        "lineno": "433",
         "name": "toggle",
         "notes": [],
         "notes_gfm": "",
@@ -18754,7 +18534,7 @@
         "doc": "Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).\n\nNotes:\n * Defaults to `true`\n * When enabled, Seal will track which results you select and prioritize them in future searches\n * Items you've selected before appear at the top, sorted by most recent first",
         "doc_gfm": "<p>Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).</p>\n<p>Notes:</p>\n<ul>\n<li>Defaults to <code>true</code></li>\n<li>When enabled, Seal will track which results you select and prioritize them in future searches</li>\n<li>Items you've selected before appear at the top, sorted by most recent first</li>\n</ul>\n",
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "50",
+        "lineno": "51",
         "name": "frecency_enable",
         "notes": [
           " * Defaults to `true`",
@@ -18774,7 +18554,7 @@
         "doc": "Path to the JSON file where frecency data is stored\n\nNotes:\n * Defaults to `~/.hammerspoon/seal_frecency.json`",
         "doc_gfm": "<p>Path to the JSON file where frecency data is stored</p>\n<p>Notes:</p>\n<ul>\n<li>Defaults to <code>~/.hammerspoon/seal_frecency.json</code></li>\n</ul>\n",
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "60",
+        "lineno": "61",
         "name": "frecency_storage_path",
         "notes": [
           " * Defaults to `~/.hammerspoon/seal_frecency.json`"
@@ -18792,7 +18572,7 @@
         "doc": "List of directories where Seal will look for plugins. Defaults to `~/.hammerspoon/seal_plugins/` and the Seal Spoon directory.",
         "doc_gfm": "<p>List of directories where Seal will look for plugins. Defaults to <code>~/.hammerspoon/seal_plugins/</code> and the Seal Spoon directory.</p>\n",
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "45",
+        "lineno": "46",
         "name": "plugin_search_paths",
         "signature": "Seal.plugin_search_paths",
         "stripped_doc": "",
@@ -18806,7 +18586,7 @@
         "doc": "Time between the last keystroke and the start of the recalculation of the choices to display, in seconds.\n\nNotes:\n * Defaults to 0.02s (20ms).",
         "doc_gfm": "<p>Time between the last keystroke and the start of the recalculation of the choices to display, in seconds.</p>\n<p>Notes:</p>\n<ul>\n<li>Defaults to 0.02s (20ms).</li>\n</ul>\n",
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "37",
+        "lineno": "38",
         "name": "queryChangedTimerDuration",
         "notes": [
           " * Defaults to 0.02s (20ms)."
@@ -18819,8 +18599,8 @@
     ],
     "desc": "Pluggable launch bar",
     "desc_gfm": "<p>Pluggable launch bar</p>\n",
-    "doc": "Pluggable launch bar\n\nDownload: [https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip](https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip)\n\nSeal includes a number of plugins, which you can choose to load (see `:loadPlugins()` below):\n * apps : Launch applications by name\n * calc : Simple calculator\n * rot13 : Apply ROT13 substitution cipher\n * safari_bookmarks : Open Safari bookmarks (this is broken since at least High Sierra)\n * screencapture : Lets you take screenshots in various ways\n * urlformats : User defined URL formats to open\n * useractions : User defined custom actions\n * vpn : Connect and disconnect VPNs (currently supports Viscosity and macOS system preferences)A",
-    "doc_gfm": "<p>Pluggable launch bar</p>\n<p>Download: <a href=\"https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip\">https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip</a></p>\n<p>Seal includes a number of plugins, which you can choose to load (see <code>:loadPlugins()</code> below):</p>\n<ul>\n<li>apps : Launch applications by name</li>\n<li>calc : Simple calculator</li>\n<li>rot13 : Apply ROT13 substitution cipher</li>\n<li>safari_bookmarks : Open Safari bookmarks (this is broken since at least High Sierra)</li>\n<li>screencapture : Lets you take screenshots in various ways</li>\n<li>urlformats : User defined URL formats to open</li>\n<li>useractions : User defined custom actions</li>\n<li>vpn : Connect and disconnect VPNs (currently supports Viscosity and macOS system preferences)A</li>\n</ul>\n",
+    "doc": "Pluggable launch bar\n\nDownload: [https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip](https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip)\n\nSeal includes a number of plugins, which you can choose to load (see `:loadPlugins()` below):\n * apps : Launch applications by name\n * calc : Simple calculator\n * chrome_bookmarks : Search and open Google Chrome bookmarks\n * rot13 : Apply ROT13 substitution cipher\n * safari_bookmarks : Open Safari bookmarks (this is broken since at least High Sierra)\n * screencapture : Lets you take screenshots in various ways\n * urlformats : User defined URL formats to open\n * useractions : User defined custom actions\n * vpn : Connect and disconnect VPNs (currently supports Viscosity and macOS system preferences)",
+    "doc_gfm": "<p>Pluggable launch bar</p>\n<p>Download: <a href=\"https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip\">https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip</a></p>\n<p>Seal includes a number of plugins, which you can choose to load (see <code>:loadPlugins()</code> below):</p>\n<ul>\n<li>apps : Launch applications by name</li>\n<li>calc : Simple calculator</li>\n<li>chrome_bookmarks : Search and open Google Chrome bookmarks</li>\n<li>rot13 : Apply ROT13 substitution cipher</li>\n<li>safari_bookmarks : Open Safari bookmarks (this is broken since at least High Sierra)</li>\n<li>screencapture : Lets you take screenshots in various ways</li>\n<li>urlformats : User defined URL formats to open</li>\n<li>useractions : User defined custom actions</li>\n<li>vpn : Connect and disconnect VPNs (currently supports Viscosity and macOS system preferences)</li>\n</ul>\n",
     "items": [
       {
         "def": "Seal:bindHotkeys(mapping)",
@@ -18831,7 +18611,7 @@
         "doc_gfm": "<p>Binds hotkeys for Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>mapping - A table containing hotkey modifier/key details for the following (optional) items:</li>\n<li>show - This will cause Seal's UI to be shown</li>\n<li>toggle - This will cause Seal's UI to be shown or hidden depending on its current state</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "337",
+        "lineno": "338",
         "name": "bindHotkeys",
         "notes": [],
         "notes_gfm": "",
@@ -18856,7 +18636,7 @@
         "doc_gfm": "<p>Calculate the recency score for a given item</p>\n<p>Parameters:</p>\n<ul>\n<li>uuid - The unique identifier of the item</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The last_used timestamp (number), or 0 if no history exists</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "156",
+        "lineno": "157",
         "name": "calculateFrecencyScore",
         "notes": [],
         "notes_gfm": "",
@@ -18882,7 +18662,7 @@
         "doc_gfm": "<p>Clear all usage history (reset recency tracking)</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "211",
+        "lineno": "212",
         "name": "clearFrecencyData",
         "notes": [],
         "notes_gfm": "",
@@ -18906,7 +18686,7 @@
         "doc": "Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).\n\nNotes:\n * Defaults to `true`\n * When enabled, Seal will track which results you select and prioritize them in future searches\n * Items you've selected before appear at the top, sorted by most recent first",
         "doc_gfm": "<p>Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).</p>\n<p>Notes:</p>\n<ul>\n<li>Defaults to <code>true</code></li>\n<li>When enabled, Seal will track which results you select and prioritize them in future searches</li>\n<li>Items you've selected before appear at the top, sorted by most recent first</li>\n</ul>\n",
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "50",
+        "lineno": "51",
         "name": "frecency_enable",
         "notes": [
           " * Defaults to `true`",
@@ -18926,7 +18706,7 @@
         "doc": "Path to the JSON file where frecency data is stored\n\nNotes:\n * Defaults to `~/.hammerspoon/seal_frecency.json`",
         "doc_gfm": "<p>Path to the JSON file where frecency data is stored</p>\n<p>Notes:</p>\n<ul>\n<li>Defaults to <code>~/.hammerspoon/seal_frecency.json</code></li>\n</ul>\n",
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "60",
+        "lineno": "61",
         "name": "frecency_storage_path",
         "notes": [
           " * Defaults to `~/.hammerspoon/seal_frecency.json`"
@@ -18945,7 +18725,7 @@
         "doc_gfm": "<p>Load frecency data from disk</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "71",
+        "lineno": "72",
         "name": "loadFrecencyData",
         "notes": [],
         "notes_gfm": "",
@@ -18970,7 +18750,7 @@
         "doc_gfm": "<p>Loads a plugin from a given file</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin, without &quot;seal_&quot; at the beginning or &quot;.lua&quot; at the end</li>\n<li>file - the file where the plugin code is stored.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object if the plugin was successfully loaded, <code>nil</code> otherwise</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>You should normally use <code>Seal:loadPlugins()</code>. This method allows you to load plugins\nfrom non-standard locations and is mostly a development interface.</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "271",
+        "lineno": "272",
         "name": "loadPluginFromFile",
         "notes": [
           " * You should normally use `Seal:loadPlugins()`. This method allows you to load plugins",
@@ -19000,7 +18780,7 @@
         "doc_gfm": "<p>Loads a list of Seal plugins</p>\n<p>Parameters:</p>\n<ul>\n<li>plugins - A list containing the names of plugins to load</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>The plugins live inside the Seal.spoon directory</li>\n<li>The plugin names in the list, should not have <code>seal_</code> at the start, or <code>.lua</code> at the end</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "299",
+        "lineno": "300",
         "name": "loadPlugins",
         "notes": [
           " * The plugins live inside the Seal.spoon directory",
@@ -19028,7 +18808,7 @@
         "doc": "List of directories where Seal will look for plugins. Defaults to `~/.hammerspoon/seal_plugins/` and the Seal Spoon directory.",
         "doc_gfm": "<p>List of directories where Seal will look for plugins. Defaults to <code>~/.hammerspoon/seal_plugins/</code> and the Seal Spoon directory.</p>\n",
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "45",
+        "lineno": "46",
         "name": "plugin_search_paths",
         "signature": "Seal.plugin_search_paths",
         "stripped_doc": "",
@@ -19042,7 +18822,7 @@
         "doc": "Time between the last keystroke and the start of the recalculation of the choices to display, in seconds.\n\nNotes:\n * Defaults to 0.02s (20ms).",
         "doc_gfm": "<p>Time between the last keystroke and the start of the recalculation of the choices to display, in seconds.</p>\n<p>Notes:</p>\n<ul>\n<li>Defaults to 0.02s (20ms).</li>\n</ul>\n",
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "37",
+        "lineno": "38",
         "name": "queryChangedTimerDuration",
         "notes": [
           " * Defaults to 0.02s (20ms)."
@@ -19061,7 +18841,7 @@
         "doc_gfm": "<p>Record a selection in the frecency database</p>\n<p>Parameters:</p>\n<ul>\n<li>query - The query string used when the selection was made (currently unused, kept for API compatibility)</li>\n<li>uuid - The unique identifier of the selected item</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "123",
+        "lineno": "124",
         "name": "recordSelection",
         "notes": [],
         "notes_gfm": "",
@@ -19087,7 +18867,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by all the currently loaded plugins.</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "252",
+        "lineno": "253",
         "name": "refreshAllCommands",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -19114,7 +18894,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by the given plugin.</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin. Should be the name as passed to <code>loadPlugins()</code> or <code>loadPluginFromFile</code>.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "227",
+        "lineno": "228",
         "name": "refreshCommandsForPlugin",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -19141,7 +18921,7 @@
         "doc_gfm": "<p>Save frecency data to disk</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "98",
+        "lineno": "99",
         "name": "saveFrecencyData",
         "notes": [],
         "notes_gfm": "",
@@ -19166,7 +18946,7 @@
         "doc_gfm": "<p>Shows the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This may be useful if you wish to show Seal in response to something other than its hotkey</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "414",
+        "lineno": "415",
         "name": "show",
         "notes": [
           " * This may be useful if you wish to show Seal in response to something other than its hotkey"
@@ -19193,7 +18973,7 @@
         "doc_gfm": "<p>Sort a list of choices by recency (items used before appear first, sorted by most recent)</p>\n<p>Parameters:</p>\n<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The sorted choices table</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "179",
+        "lineno": "180",
         "name": "sortChoicesByFrecency",
         "notes": [],
         "notes_gfm": "",
@@ -19219,7 +18999,7 @@
         "doc_gfm": "<p>Starts Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "370",
+        "lineno": "371",
         "name": "start",
         "notes": [],
         "notes_gfm": "",
@@ -19244,7 +19024,7 @@
         "doc_gfm": "<p>Stops Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "390",
+        "lineno": "391",
         "name": "stop",
         "notes": [
           " * Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)"
@@ -19271,7 +19051,7 @@
         "doc_gfm": "<p>Shows or hides the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "432",
+        "lineno": "433",
         "name": "toggle",
         "notes": [],
         "notes_gfm": "",
@@ -19289,7 +19069,7 @@
       }
     ],
     "name": "Seal",
-    "stripped_doc": "\nDownload: [https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip](https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip)\n\nSeal includes a number of plugins, which you can choose to load (see `:loadPlugins()` below):\n * apps : Launch applications by name\n * calc : Simple calculator\n * rot13 : Apply ROT13 substitution cipher\n * safari_bookmarks : Open Safari bookmarks (this is broken since at least High Sierra)\n * screencapture : Lets you take screenshots in various ways\n * urlformats : User defined URL formats to open\n * useractions : User defined custom actions\n * vpn : Connect and disconnect VPNs (currently supports Viscosity and macOS system preferences)A",
+    "stripped_doc": "\nDownload: [https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip](https://github.com/Hammerspoon/Spoons/raw/master/Spoons/Seal.spoon.zip)\n\nSeal includes a number of plugins, which you can choose to load (see `:loadPlugins()` below):\n * apps : Launch applications by name\n * calc : Simple calculator\n * chrome_bookmarks : Search and open Google Chrome bookmarks\n * rot13 : Apply ROT13 substitution cipher\n * safari_bookmarks : Open Safari bookmarks (this is broken since at least High Sierra)\n * screencapture : Lets you take screenshots in various ways\n * urlformats : User defined URL formats to open\n * useractions : User defined custom actions\n * vpn : Connect and disconnect VPNs (currently supports Viscosity and macOS system preferences)",
     "submodules": [
       "plugins"
     ],
@@ -19313,6 +19093,7 @@
     "stripped_doc": "",
     "submodules": [
       "apps",
+      "chrome_bookmarks",
       "filesearch",
       "pasteboard",
       "safari_bookmarks",
@@ -19531,6 +19312,83 @@
     ],
     "name": "Seal.plugins.apps",
     "stripped_doc": "",
+    "submodules": [],
+    "type": "Module"
+  },
+  {
+    "Command": [],
+    "Constant": [],
+    "Constructor": [],
+    "Deprecated": [],
+    "Field": [],
+    "Function": [],
+    "Method": [],
+    "Variable": [
+      {
+        "def": "Seal.plugins.chrome_bookmarks.always_open_with_chrome",
+        "def_gfm": "Seal.plugins.chrome_bookmarks.always_open_with_chrome",
+        "desc": "If `true` (default), bookmarks are always opened with Chrome. If `false`, they are opened with the default browser.",
+        "desc_gfm": "<p>If <code>true</code> (default), bookmarks are always opened with Chrome. If <code>false</code>, they are opened with the default browser.</p>\n",
+        "doc": "If `true` (default), bookmarks are always opened with Chrome. If `false`, they are opened with the default browser.",
+        "doc_gfm": "<p>If <code>true</code> (default), bookmarks are always opened with Chrome. If <code>false</code>, they are opened with the default browser.</p>\n",
+        "file": "Source/Seal.spoon/seal_chrome_bookmarks.lua",
+        "lineno": "16",
+        "name": "always_open_with_chrome",
+        "signature": "Seal.plugins.chrome_bookmarks.always_open_with_chrome",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Seal.plugins.chrome_bookmarks.profiles",
+        "def_gfm": "Seal.plugins.chrome_bookmarks.profiles",
+        "desc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
+        "desc_gfm": "<p>Which Chrome profiles to index. Can be &quot;auto&quot; to auto-detect all profiles, or a table like { &quot;Default&quot;, &quot;Profile 1&quot; }. Default: &quot;auto&quot;</p>\n",
+        "doc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
+        "doc_gfm": "<p>Which Chrome profiles to index. Can be &quot;auto&quot; to auto-detect all profiles, or a table like { &quot;Default&quot;, &quot;Profile 1&quot; }. Default: &quot;auto&quot;</p>\n",
+        "file": "Source/Seal.spoon/seal_chrome_bookmarks.lua",
+        "lineno": "11",
+        "name": "profiles",
+        "signature": "Seal.plugins.chrome_bookmarks.profiles",
+        "stripped_doc": "",
+        "type": "Variable"
+      }
+    ],
+    "desc": "",
+    "desc_gfm": "",
+    "doc": "\nAutomatically indexes bookmarks from all Chrome profiles and provides fast searching.\nBookmarks appear in the default Seal results - no keyword required.",
+    "doc_gfm": "<p>Automatically indexes bookmarks from all Chrome profiles and provides fast searching.\nBookmarks appear in the default Seal results - no keyword required.</p>\n",
+    "items": [
+      {
+        "def": "Seal.plugins.chrome_bookmarks.always_open_with_chrome",
+        "def_gfm": "Seal.plugins.chrome_bookmarks.always_open_with_chrome",
+        "desc": "If `true` (default), bookmarks are always opened with Chrome. If `false`, they are opened with the default browser.",
+        "desc_gfm": "<p>If <code>true</code> (default), bookmarks are always opened with Chrome. If <code>false</code>, they are opened with the default browser.</p>\n",
+        "doc": "If `true` (default), bookmarks are always opened with Chrome. If `false`, they are opened with the default browser.",
+        "doc_gfm": "<p>If <code>true</code> (default), bookmarks are always opened with Chrome. If <code>false</code>, they are opened with the default browser.</p>\n",
+        "file": "Source/Seal.spoon/seal_chrome_bookmarks.lua",
+        "lineno": "16",
+        "name": "always_open_with_chrome",
+        "signature": "Seal.plugins.chrome_bookmarks.always_open_with_chrome",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Seal.plugins.chrome_bookmarks.profiles",
+        "def_gfm": "Seal.plugins.chrome_bookmarks.profiles",
+        "desc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
+        "desc_gfm": "<p>Which Chrome profiles to index. Can be &quot;auto&quot; to auto-detect all profiles, or a table like { &quot;Default&quot;, &quot;Profile 1&quot; }. Default: &quot;auto&quot;</p>\n",
+        "doc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
+        "doc_gfm": "<p>Which Chrome profiles to index. Can be &quot;auto&quot; to auto-detect all profiles, or a table like { &quot;Default&quot;, &quot;Profile 1&quot; }. Default: &quot;auto&quot;</p>\n",
+        "file": "Source/Seal.spoon/seal_chrome_bookmarks.lua",
+        "lineno": "11",
+        "name": "profiles",
+        "signature": "Seal.plugins.chrome_bookmarks.profiles",
+        "stripped_doc": "",
+        "type": "Variable"
+      }
+    ],
+    "name": "Seal.plugins.chrome_bookmarks",
+    "stripped_doc": "Automatically indexes bookmarks from all Chrome profiles and provides fast searching.\nBookmarks appear in the default Seal results - no keyword required.",
     "submodules": [],
     "type": "Module"
   },
