@@ -1,0 +1,215 @@
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Hammerspoon docs: ChromeBookmarks</title>
+    <style type="text/css">
+      a { text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      th { background-color: #DDDDDD; vertical-align: top; padding: 3px; }
+      td { width: 100%; background-color: #EEEEEE; vertical-align: top; padding: 3px; }
+      table { width: 100% ; border: 1px solid #0; text-align: left; }
+      section > table table td { width: 0; }
+    </style>
+    <link rel="stylesheet" href="docs.css" type="text/css" media="screen" />
+  </head>
+  <body>
+    <header>
+      <h1><a href="./index.html">docs</a> &raquo; ChromeBookmarks</h1>
+      <p>Search Google Chrome bookmarks via Seal</p>
+<p>Download: <a href="https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip">https://github.com/Hammerspoon/Spoons/raw/master/Spoons/ChromeBookmarks.spoon.zip</a></p>
+<p>This Spoon provides a Seal plugin to search and open Google Chrome bookmarks.
+It automatically indexes bookmarks from all Chrome profiles and provides fast fuzzy searching.</p>
+<p>Example usage:</p>
+
+<pre><code>hs.loadSpoon(&quot;Seal&quot;)
+spoon.Seal:start()
+hs.loadSpoon(&quot;ChromeBookmarks&quot;)
+spoon.ChromeBookmarks.profiles = &quot;auto&quot;           -- or { &quot;Default&quot;, &quot;Profile 1&quot; }
+spoon.ChromeBookmarks.keyword = &quot;cb&quot;              -- type: &quot;cb &lt;query&gt;&quot;
+spoon.ChromeBookmarks.openBehavior = &quot;chrome&quot;     -- &quot;chrome&quot; or &quot;default&quot;
+spoon.ChromeBookmarks.maxResults = 200
+spoon.ChromeBookmarks:bindToSeal(spoon.Seal)
+</code></pre>
+
+      </header>
+      <h3>API Overview</h3>
+      <ul>
+        <li>Variables - Configurable values</li>
+          <ul>
+            <li><a href="#keyword">keyword</a></li>
+            <li><a href="#logLevel">logLevel</a></li>
+            <li><a href="#maxResults">maxResults</a></li>
+            <li><a href="#openBehavior">openBehavior</a></li>
+            <li><a href="#profiles">profiles</a></li>
+          </ul>
+        <li>Methods - API calls which can only be made on an object returned by a constructor</li>
+          <ul>
+            <li><a href="#bindToSeal">bindToSeal</a></li>
+          </ul>
+      </ul>
+      <h3>API Documentation</h3>
+        <h4 class="documentation-section">Variables</h4>
+          <section id="keyword">
+            <a name="//apple_ref/cpp/Variable/keyword" class="dashAnchor"></a>
+            <h5><a href="#keyword">keyword</a></h5>
+            <table>
+              <tr>
+                <th>Signature</th>
+                <td><code>ChromeBookmarks.keyword</code></td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>Variable</td>
+              </tr>
+              <tr>
+                <th>Description</th>
+                <td><p>The keyword to trigger Chrome bookmarks search in Seal. Default: &quot;cb&quot;</p>
+</td>
+              </tr>
+              <tr>
+                <th>Source</th>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/ChromeBookmarks.spoon/init.lua#L32">Source/ChromeBookmarks.spoon/init.lua line 32</a></td>
+              </tr>
+            </table>
+          </section>
+          <section id="logLevel">
+            <a name="//apple_ref/cpp/Variable/logLevel" class="dashAnchor"></a>
+            <h5><a href="#logLevel">logLevel</a></h5>
+            <table>
+              <tr>
+                <th>Signature</th>
+                <td><code>ChromeBookmarks.logLevel</code></td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>Variable</td>
+              </tr>
+              <tr>
+                <th>Description</th>
+                <td><p>Logger verbosity level. Can be 'nothing', 'error', 'warning', 'info', 'debug', or 'verbose'. Default: nil (uses plugin default)</p>
+</td>
+              </tr>
+              <tr>
+                <th>Source</th>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/ChromeBookmarks.spoon/init.lua#L52">Source/ChromeBookmarks.spoon/init.lua line 52</a></td>
+              </tr>
+            </table>
+          </section>
+          <section id="maxResults">
+            <a name="//apple_ref/cpp/Variable/maxResults" class="dashAnchor"></a>
+            <h5><a href="#maxResults">maxResults</a></h5>
+            <table>
+              <tr>
+                <th>Signature</th>
+                <td><code>ChromeBookmarks.maxResults</code></td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>Variable</td>
+              </tr>
+              <tr>
+                <th>Description</th>
+                <td><p>Maximum number of search results to display. Default: 200</p>
+</td>
+              </tr>
+              <tr>
+                <th>Source</th>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/ChromeBookmarks.spoon/init.lua#L42">Source/ChromeBookmarks.spoon/init.lua line 42</a></td>
+              </tr>
+            </table>
+          </section>
+          <section id="openBehavior">
+            <a name="//apple_ref/cpp/Variable/openBehavior" class="dashAnchor"></a>
+            <h5><a href="#openBehavior">openBehavior</a></h5>
+            <table>
+              <tr>
+                <th>Signature</th>
+                <td><code>ChromeBookmarks.openBehavior</code></td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>Variable</td>
+              </tr>
+              <tr>
+                <th>Description</th>
+                <td><p>How to open bookmarks. &quot;chrome&quot; opens in Chrome, &quot;default&quot; uses system default browser. Default: &quot;chrome&quot;</p>
+</td>
+              </tr>
+              <tr>
+                <th>Source</th>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/ChromeBookmarks.spoon/init.lua#L47">Source/ChromeBookmarks.spoon/init.lua line 47</a></td>
+              </tr>
+            </table>
+          </section>
+          <section id="profiles">
+            <a name="//apple_ref/cpp/Variable/profiles" class="dashAnchor"></a>
+            <h5><a href="#profiles">profiles</a></h5>
+            <table>
+              <tr>
+                <th>Signature</th>
+                <td><code>ChromeBookmarks.profiles</code></td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>Variable</td>
+              </tr>
+              <tr>
+                <th>Description</th>
+                <td><p>Which Chrome profiles to index. Can be &quot;auto&quot; to auto-detect all profiles, or a table like { &quot;Default&quot;, &quot;Profile 1&quot; }. Default: &quot;auto&quot;</p>
+</td>
+              </tr>
+              <tr>
+                <th>Source</th>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/ChromeBookmarks.spoon/init.lua#L37">Source/ChromeBookmarks.spoon/init.lua line 37</a></td>
+              </tr>
+            </table>
+          </section>
+        <h4 class="documentation-section">Methods</h4>
+          <section id="bindToSeal">
+            <a name="//apple_ref/cpp/Method/bindToSeal" class="dashAnchor"></a>
+            <h5><a href="#bindToSeal">bindToSeal</a></h5>
+            <table>
+              <tr>
+                <th>Signature</th>
+                <td><code>ChromeBookmarks:bindToSeal(seal)</code></td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>Method</td>
+              </tr>
+              <tr>
+                <th>Description</th>
+                <td><p>Binds the Chrome bookmarks plugin to a running Seal instance</p>
+</td>
+              </tr>
+              <tr>
+                  <th>Parameters</th>
+                  <td><ul>
+<li>seal - A running Seal spoon instance (e.g., spoon.Seal)</li>
+</ul>
+</td>
+              </tr>
+              <tr>
+                  <th>Returns</th>
+                  <td><ul>
+<li>The ChromeBookmarks object for method chaining</li>
+</ul>
+</td>
+              </tr>
+              <tr>
+                  <th>Notes</th>
+                  <td><ul>
+<li>This method loads the Chrome bookmarks plugin into Seal and configures it with the current settings</li>
+<li>You must call this after configuring the Spoon's variables (keyword, profiles, etc.)</li>
+<li>The plugin will automatically start indexing bookmarks when Seal starts</li>
+</ul>
+</td>
+              </tr>
+              <tr>
+                <th>Source</th>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/ChromeBookmarks.spoon/init.lua#L64">Source/ChromeBookmarks.spoon/init.lua line 64</a></td>
+              </tr>
+            </table>
+          </section>
+  </body>
+</html>
