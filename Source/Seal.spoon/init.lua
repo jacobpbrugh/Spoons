@@ -201,9 +201,23 @@ function obj:sortChoicesByFrecency(choices, query)
         end
     end
 
-    -- Sort by recency score (descending) - most recently used items first
+    -- Sort by plugin priority score first, then by frecency
+    -- Scores >= 50000 are considered "high priority" (e.g., calc results)
+    -- This ensures high-confidence plugin results appear first
+    local HIGH_PRIORITY_THRESHOLD = 50000
     table.sort(choices, function(a, b)
-        return (a.frecency_score or 0) > (b.frecency_score or 0)
+        local score_a = a._score or 0
+        local score_b = b._score or 0
+        local high_pri_a = score_a >= HIGH_PRIORITY_THRESHOLD
+        local high_pri_b = score_b >= HIGH_PRIORITY_THRESHOLD
+
+        -- If both are high priority or both are normal priority, sort by frecency
+        if high_pri_a == high_pri_b then
+            return (a.frecency_score or 0) > (b.frecency_score or 0)
+        end
+
+        -- Otherwise, high priority wins
+        return high_pri_a
     end)
 
     return choices

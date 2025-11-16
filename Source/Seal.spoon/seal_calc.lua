@@ -32,6 +32,8 @@ function obj.bareCalc(query)
             choice["image"] = obj.icon
             choice["plugin"] = obj.__name
             choice["type"] = "copyToClipboard"
+            choice["uuid"] = obj.__name .. "__" .. query  -- For frecency tracking
+            choice["_score"] = 100000  -- Very high score to prioritize calc over other plugins
             table.insert(choices, choice)
         end
     end
