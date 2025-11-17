@@ -21,7 +21,7 @@ obj.__index = obj
 
 -- Metadata
 obj.name = "Seal"
-obj.version = "1.0"
+obj.version = "1.1"
 obj.author = "Chris Jones <cmsj@tenshu.net>"
 obj.homepage = "https://github.com/Hammerspoon/Spoons"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
@@ -459,6 +459,70 @@ function obj:toggle(query)
     else
         self:show(query)
     end
+    return self
+end
+
+--- Seal:showPasteboard()
+--- Method
+--- Shows the Seal UI with clipboard history results directly (no command prefix)
+---
+--- Parameters:
+---  * None
+---
+--- Returns:
+---  * The Seal object
+---
+--- Notes:
+---  * This is useful for creating a dedicated hotkey to browse clipboard history
+---  * The search box will be empty but will filter clipboard items as you type
+function obj:showPasteboard()
+    if not self.plugins.pasteboard then
+        hs.alert.show("Pasteboard plugin not loaded")
+        return self
+    end
+
+    -- Create a temporary chooser callback that filters pasteboard items
+    local pasteboardChoicesCallback = function()
+        local query = obj.chooser:query() or ""
+        return obj.plugins.pasteboard.choicesPasteboardCommand(query)
+    end
+
+    -- Save original callbacks
+    local originalCallback = self.choicesCallback
+    local originalCompletionCallback = self.completionCallback
+
+    -- Function to restore original behavior
+    local function restoreCallbacks()
+        obj.chooser:choices(originalCallback)
+        obj.completionCallback = originalCompletionCallback
+        if obj._pasteboardWatcher then
+            obj._pasteboardWatcher:stop()
+            obj._pasteboardWatcher = nil
+        end
+    end
+
+    -- Temporarily replace the choices callback
+    self.chooser:choices(pasteboardChoicesCallback)
+
+    -- Show the chooser
+    self.chooser:show()
+
+    -- Set up a watcher to restore callbacks when chooser is dismissed
+    obj._pasteboardWatcher = hs.timer.doEvery(0.1, function()
+        if not obj.chooser:isVisible() then
+            restoreCallbacks()
+        end
+    end)
+
+    -- Also handle completion (when item is selected)
+    self.completionCallback = function(rowInfo)
+        restoreCallbacks()
+        -- Handle the selection
+        if rowInfo then
+            originalCompletionCallback(rowInfo)
+        end
+    end
+
     return self
 end
 

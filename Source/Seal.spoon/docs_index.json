@@ -1,0 +1,274 @@
+[
+  {
+    "desc": "Pluggable launch bar",
+    "name": "Seal",
+    "type": "Module"
+  },
+  {
+    "desc": "Enable recency-based result ranking (results you've selected before will be prioritized by how recently you used them).",
+    "module": "Seal",
+    "name": "frecency_enable",
+    "type": "Variable"
+  },
+  {
+    "desc": "Path to the JSON file where frecency data is stored",
+    "module": "Seal",
+    "name": "frecency_storage_path",
+    "type": "Variable"
+  },
+  {
+    "desc": "List of directories where Seal will look for plugins. Defaults to `~/.hammerspoon/seal_plugins/` and the Seal Spoon directory.",
+    "module": "Seal",
+    "name": "plugin_search_paths",
+    "type": "Variable"
+  },
+  {
+    "desc": "Time between the last keystroke and the start of the recalculation of the choices to display, in seconds.",
+    "module": "Seal",
+    "name": "queryChangedTimerDuration",
+    "type": "Variable"
+  },
+  {
+    "desc": "Binds hotkeys for Seal",
+    "module": "Seal",
+    "name": "bindHotkeys",
+    "type": "Method"
+  },
+  {
+    "desc": "Calculate the recency score for a given item",
+    "module": "Seal",
+    "name": "calculateFrecencyScore",
+    "type": "Method"
+  },
+  {
+    "desc": "Clear all usage history (reset recency tracking)",
+    "module": "Seal",
+    "name": "clearFrecencyData",
+    "type": "Method"
+  },
+  {
+    "desc": "Load frecency data from disk",
+    "module": "Seal",
+    "name": "loadFrecencyData",
+    "type": "Method"
+  },
+  {
+    "desc": "Loads a plugin from a given file",
+    "module": "Seal",
+    "name": "loadPluginFromFile",
+    "type": "Method"
+  },
+  {
+    "desc": "Loads a list of Seal plugins",
+    "module": "Seal",
+    "name": "loadPlugins",
+    "type": "Method"
+  },
+  {
+    "desc": "Record a selection in the frecency database",
+    "module": "Seal",
+    "name": "recordSelection",
+    "type": "Method"
+  },
+  {
+    "desc": "Refresh the list of commands provided by all the currently loaded plugins.",
+    "module": "Seal",
+    "name": "refreshAllCommands",
+    "type": "Method"
+  },
+  {
+    "desc": "Refresh the list of commands provided by the given plugin.",
+    "module": "Seal",
+    "name": "refreshCommandsForPlugin",
+    "type": "Method"
+  },
+  {
+    "desc": "Save frecency data to disk",
+    "module": "Seal",
+    "name": "saveFrecencyData",
+    "type": "Method"
+  },
+  {
+    "desc": "Shows the Seal UI",
+    "module": "Seal",
+    "name": "show",
+    "type": "Method"
+  },
+  {
+    "desc": "Shows the Seal UI with clipboard history results directly (no command prefix)",
+    "module": "Seal",
+    "name": "showPasteboard",
+    "type": "Method"
+  },
+  {
+    "desc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)",
+    "module": "Seal",
+    "name": "sortChoicesByFrecency",
+    "type": "Method"
+  },
+  {
+    "desc": "Starts Seal",
+    "module": "Seal",
+    "name": "start",
+    "type": "Method"
+  },
+  {
+    "desc": "Stops Seal",
+    "module": "Seal",
+    "name": "stop",
+    "type": "Method"
+  },
+  {
+    "desc": "Shows or hides the Seal UI",
+    "module": "Seal",
+    "name": "toggle",
+    "type": "Method"
+  },
+  {
+    "desc": "Various APIs for Seal plugins",
+    "name": "Seal.plugins",
+    "type": "Module"
+  },
+  {
+    "desc": "A plugin to add launchable apps/scripts, making Seal act as a launch bar",
+    "name": "Seal.plugins.apps",
+    "type": "Module"
+  },
+  {
+    "desc": "Table containing the paths to search for launchable items",
+    "module": "Seal.plugins.apps",
+    "name": "appSearchPaths",
+    "type": "Variable"
+  },
+  {
+    "desc": "Restarts the Spotlight app searcher",
+    "module": "Seal.plugins.apps",
+    "name": "restart",
+    "type": "Method"
+  },
+  {
+    "desc": "Starts the Spotlight app searcher",
+    "module": "Seal.plugins.apps",
+    "name": "start",
+    "type": "Method"
+  },
+  {
+    "desc": "Stops the Spotlight app searcher",
+    "module": "Seal.plugins.apps",
+    "name": "stop",
+    "type": "Method"
+  },
+  {
+    "desc": "",
+    "name": "Seal.plugins.chrome_bookmarks",
+    "type": "Module"
+  },
+  {
+    "desc": "If `true` (default), bookmarks are always opened with Chrome. If `false`, they are opened with the default browser.",
+    "module": "Seal.plugins.chrome_bookmarks",
+    "name": "always_open_with_chrome",
+    "type": "Variable"
+  },
+  {
+    "desc": "Which Chrome profiles to index. Can be \"auto\" to auto-detect all profiles, or a table like { \"Default\", \"Profile 1\" }. Default: \"auto\"",
+    "module": "Seal.plugins.chrome_bookmarks",
+    "name": "profiles",
+    "type": "Variable"
+  },
+  {
+    "desc": "A plugin to add file search capabilities, making Seal act as a spotlight file search",
+    "name": "Seal.plugins.filesearch",
+    "type": "Module"
+  },
+  {
+    "desc": "Maximum time to wait before displaying the results",
+    "module": "Seal.plugins.filesearch",
+    "name": "displayResultsTimeout",
+    "type": "Variable"
+  },
+  {
+    "desc": "Table containing the paths to search for files",
+    "module": "Seal.plugins.filesearch",
+    "name": "fileSearchPaths",
+    "type": "Variable"
+  },
+  {
+    "desc": "Maximum number of results to display",
+    "module": "Seal.plugins.filesearch",
+    "name": "maxResults",
+    "type": "Variable"
+  },
+  {
+    "desc": "Visual, searchable pasteboard (ie clipboard) history",
+    "name": "Seal.plugins.pasteboard",
+    "type": "Module"
+  },
+  {
+    "desc": "",
+    "module": "Seal.plugins.pasteboard",
+    "name": "historySize",
+    "type": "Variable"
+  },
+  {
+    "desc": "",
+    "module": "Seal.plugins.pasteboard",
+    "name": "saveHistory",
+    "type": "Variable"
+  },
+  {
+    "desc": "",
+    "module": "Seal.plugins.pasteboard",
+    "name": "skipUTIs",
+    "type": "Variable"
+  },
+  {
+    "desc": "",
+    "name": "Seal.plugins.safari_bookmarks",
+    "type": "Module"
+  },
+  {
+    "desc": "If `true` (default), bookmarks are always opened with Safari, otherwise they are opened with the default application using the `/usr/bin/open` command.",
+    "module": "Seal.plugins.safari_bookmarks",
+    "name": "always_open_with_safari",
+    "type": "Variable"
+  },
+  {
+    "desc": "A plugin to capture the screen in various ways",
+    "name": "Seal.plugins.screencapture",
+    "type": "Module"
+  },
+  {
+    "desc": "Whether or not to show the screen capture UI in macOS 10.14 or later",
+    "module": "Seal.plugins.screencapture",
+    "name": "showPostUI",
+    "type": "Variable"
+  },
+  {
+    "desc": "A plugin to quickly open URLs containing a search/query term",
+    "name": "Seal.plugins.urlformats",
+    "type": "Module"
+  },
+  {
+    "desc": "Gets or sets the current providers table",
+    "module": "Seal.plugins.urlformats",
+    "name": "providersTable",
+    "type": "Method"
+  },
+  {
+    "desc": "Allow accessing user-defined bookmarks and arbitrary actions from Seal.",
+    "name": "Seal.plugins.useractions",
+    "type": "Module"
+  },
+  {
+    "desc": "",
+    "module": "Seal.plugins.useractions",
+    "name": "actions",
+    "type": "Variable"
+  },
+  {
+    "desc": "",
+    "module": "Seal.plugins.useractions",
+    "name": "get_favicon",
+    "type": "Variable"
+  }
+]
