@@ -18422,6 +18422,34 @@
         "type": "Method"
       },
       {
+        "def": "Seal:showPasteboard()",
+        "def_gfm": "Seal:showPasteboard()",
+        "desc": "Shows the Seal UI with clipboard history results directly (no command prefix)",
+        "desc_gfm": "<p>Shows the Seal UI with clipboard history results directly (no command prefix)</p>\n",
+        "doc": "Shows the Seal UI with clipboard history results directly (no command prefix)\n\nParameters:\n * None\n\nReturns:\n * The Seal object\n\nNotes:\n * This is useful for creating a dedicated hotkey to browse clipboard history\n * The search box will be empty but will filter clipboard items as you type",
+        "doc_gfm": "<p>Shows the Seal UI with clipboard history results directly (no command prefix)</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This is useful for creating a dedicated hotkey to browse clipboard history</li>\n<li>The search box will be empty but will filter clipboard items as you type</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "465",
+        "name": "showPasteboard",
+        "notes": [
+          " * This is useful for creating a dedicated hotkey to browse clipboard history",
+          " * The search box will be empty but will filter clipboard items as you type"
+        ],
+        "notes_gfm": "<ul>\n<li>This is useful for creating a dedicated hotkey to browse clipboard history</li>\n<li>The search box will be empty but will filter clipboard items as you type</li>\n</ul>\n",
+        "parameters": [
+          " * None"
+        ],
+        "parameters_gfm": "<ul>\n<li>None</li>\n</ul>\n",
+        "returns": [
+          " * The Seal object"
+        ],
+        "returns_gfm": "<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "signature": "Seal:showPasteboard()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
         "def": "Seal:sortChoicesByFrecency(choices, query)",
         "def_gfm": "Seal:sortChoicesByFrecency(choices, query)",
         "desc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)",
@@ -18961,6 +18989,34 @@
         ],
         "returns_gfm": "<ul>\n<li>None</li>\n</ul>\n",
         "signature": "Seal:show(query)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Seal:showPasteboard()",
+        "def_gfm": "Seal:showPasteboard()",
+        "desc": "Shows the Seal UI with clipboard history results directly (no command prefix)",
+        "desc_gfm": "<p>Shows the Seal UI with clipboard history results directly (no command prefix)</p>\n",
+        "doc": "Shows the Seal UI with clipboard history results directly (no command prefix)\n\nParameters:\n * None\n\nReturns:\n * The Seal object\n\nNotes:\n * This is useful for creating a dedicated hotkey to browse clipboard history\n * The search box will be empty but will filter clipboard items as you type",
+        "doc_gfm": "<p>Shows the Seal UI with clipboard history results directly (no command prefix)</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This is useful for creating a dedicated hotkey to browse clipboard history</li>\n<li>The search box will be empty but will filter clipboard items as you type</li>\n</ul>\n",
+        "examples": [],
+        "file": "Source/Seal.spoon/init.lua",
+        "lineno": "465",
+        "name": "showPasteboard",
+        "notes": [
+          " * This is useful for creating a dedicated hotkey to browse clipboard history",
+          " * The search box will be empty but will filter clipboard items as you type"
+        ],
+        "notes_gfm": "<ul>\n<li>This is useful for creating a dedicated hotkey to browse clipboard history</li>\n<li>The search box will be empty but will filter clipboard items as you type</li>\n</ul>\n",
+        "parameters": [
+          " * None"
+        ],
+        "parameters_gfm": "<ul>\n<li>None</li>\n</ul>\n",
+        "returns": [
+          " * The Seal object"
+        ],
+        "returns_gfm": "<ul>\n<li>The Seal object</li>\n</ul>\n",
+        "signature": "Seal:showPasteboard()",
         "stripped_doc": "",
         "type": "Method"
       },

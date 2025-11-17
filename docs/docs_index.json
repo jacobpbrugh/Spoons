@@ -2721,6 +2721,12 @@
     "type": "Method"
   },
   {
+    "desc": "Shows the Seal UI with clipboard history results directly (no command prefix)",
+    "module": "Seal",
+    "name": "showPasteboard",
+    "type": "Method"
+  },
+  {
     "desc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)",
     "module": "Seal",
     "name": "sortChoicesByFrecency",
