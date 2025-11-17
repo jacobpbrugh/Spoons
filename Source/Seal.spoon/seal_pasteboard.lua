@@ -63,10 +63,17 @@ function obj:bare()
 end
 
 function obj.choicesPasteboardCommand(query)
-    -- Return the choices that match the query
-    return hs.fnutils.filter(obj.choices, function(choice)
+    -- Return the choices that match the query, sorted by recency (most recent first)
+    local filtered = hs.fnutils.filter(obj.choices, function(choice)
         return string.find(string.lower(choice["text"]), string.lower(query))
     end)
+
+    -- Sort by timestamp descending (most recent first)
+    table.sort(filtered, function(a, b)
+        return (a.timestamp or 0) > (b.timestamp or 0)
+    end)
+
+    return filtered
 end
 
 function obj.pasteboardToChoice(item)
@@ -79,6 +86,7 @@ function obj.pasteboardToChoice(item)
     choice["plugin"] = obj.__name
     choice["type"] = "copy"
     choice["subText"] = ""
+    choice["timestamp"] = item["timestamp"]
 
     if item["uti"] then
         choice["subText"] = item["uti"]
@@ -90,8 +98,9 @@ function obj.pasteboardToChoice(item)
             end
         end
     end
-    if item["dateTime"] then
-        choice["subText"] = choice["subText"] .. " :: " .. item["dateTime"]
+    if item["timestamp"] then
+        -- Convert timestamp to human-readable format for display
+        choice["subText"] = choice["subText"] .. " :: " .. os.date("%Y-%m-%d %H:%M:%S", item["timestamp"])
     end
 
     return choice
@@ -100,6 +109,34 @@ end
 function obj.completionCallback(rowInfo)
     if rowInfo["type"] == "copy" then
         hs.pasteboard.setContents(rowInfo["name"])
+
+        -- Update timestamp since this item is now the most recent clipboard item
+        local uuid = rowInfo["uuid"]
+        local new_timestamp = os.time()
+
+        -- Update in itemBuffer
+        for i, item in ipairs(obj.itemBuffer) do
+            if item["uuid"] == uuid then
+                item["timestamp"] = new_timestamp
+                break
+            end
+        end
+
+        -- Update in choices
+        for i, choice in ipairs(obj.choices) do
+            if choice["uuid"] == uuid then
+                choice["timestamp"] = new_timestamp
+                -- Update the display text
+                if choice["subText"]:find(" :: ") then
+                    local uti_part = choice["subText"]:match("^(.-)%s+::")
+                    choice["subText"] = uti_part .. " :: " .. os.date("%Y-%m-%d %H:%M:%S", new_timestamp)
+                end
+                break
+            end
+        end
+
+        -- Save the updated history
+        obj.save()
     end
 end
 
@@ -129,7 +166,7 @@ function obj.checkPasteboard()
         item["uuid"] = hs.host.uuid()
         item["text"] = pasteboard
         item["uti"] = currentTypes[1]
-        item["dateTime"] = os.date()
+        item["timestamp"] = os.time()
 
         table.insert(obj.itemBuffer, item)
         table.insert(obj.choices, obj.pasteboardToChoice(item))
@@ -163,6 +200,18 @@ function obj.load()
         local json = hs.json.decode(file:read())
         if json then
             obj.itemBuffer = json
+
+            -- Migrate old dateTime format to timestamp format
+            for _, v in ipairs(obj.itemBuffer) do
+                if v["dateTime"] and not v["timestamp"] then
+                    -- Old format - use current time as timestamp (can't parse old dateTime string reliably)
+                    v["timestamp"] = os.time()
+                    v["dateTime"] = nil
+                elseif not v["timestamp"] then
+                    -- No timestamp at all - set to current time
+                    v["timestamp"] = os.time()
+                end
+            end
 
             -- Convert all the items to the choice buffer
             for _, v in ipairs(obj.itemBuffer) do
