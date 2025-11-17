@@ -108,35 +108,9 @@ end
 
 function obj.completionCallback(rowInfo)
     if rowInfo["type"] == "copy" then
+        -- Set to clipboard - checkPasteboard will automatically detect this
+        -- and update the timestamp + move it to the end (most recent position)
         hs.pasteboard.setContents(rowInfo["name"])
-
-        -- Update timestamp since this item is now the most recent clipboard item
-        local uuid = rowInfo["uuid"]
-        local new_timestamp = os.time()
-
-        -- Update in itemBuffer
-        for i, item in ipairs(obj.itemBuffer) do
-            if item["uuid"] == uuid then
-                item["timestamp"] = new_timestamp
-                break
-            end
-        end
-
-        -- Update in choices
-        for i, choice in ipairs(obj.choices) do
-            if choice["uuid"] == uuid then
-                choice["timestamp"] = new_timestamp
-                -- Update the display text
-                if choice["subText"]:find(" :: ") then
-                    local uti_part = choice["subText"]:match("^(.-)%s+::")
-                    choice["subText"] = uti_part .. " :: " .. os.date("%Y-%m-%d %H:%M:%S", new_timestamp)
-                end
-                break
-            end
-        end
-
-        -- Save the updated history
-        obj.save()
     end
 end
 
@@ -162,16 +136,44 @@ function obj.checkPasteboard()
                 end
             end
         end
-        local item = {}
-        item["uuid"] = hs.host.uuid()
-        item["text"] = pasteboard
-        item["uti"] = currentTypes[1]
-        item["timestamp"] = os.time()
 
-        table.insert(obj.itemBuffer, item)
-        table.insert(obj.choices, obj.pasteboardToChoice(item))
+        -- Check if this item already exists in the buffer (prevent duplicates)
+        local existingIndex = nil
+        for i, item in ipairs(obj.itemBuffer) do
+            if item["text"] == pasteboard then
+                existingIndex = i
+                break
+            end
+        end
 
-        shouldSave = true
+        if existingIndex then
+            -- Item already exists - update its timestamp and move to end (most recent)
+            local item = obj.itemBuffer[existingIndex]
+            item["timestamp"] = os.time()
+            item["uti"] = currentTypes[1]  -- Update UTI in case it changed
+
+            -- Remove from current position
+            table.remove(obj.itemBuffer, existingIndex)
+            table.remove(obj.choices, existingIndex)
+
+            -- Add to end (most recent)
+            table.insert(obj.itemBuffer, item)
+            table.insert(obj.choices, obj.pasteboardToChoice(item))
+
+            shouldSave = true
+        else
+            -- New item - add it
+            local item = {}
+            item["uuid"] = hs.host.uuid()
+            item["text"] = pasteboard
+            item["uti"] = currentTypes[1]
+            item["timestamp"] = os.time()
+
+            table.insert(obj.itemBuffer, item)
+            table.insert(obj.choices, obj.pasteboardToChoice(item))
+
+            shouldSave = true
+        end
     end
     if #obj.itemBuffer > obj.historySize then
         table.remove(obj.itemBuffer, 1)
