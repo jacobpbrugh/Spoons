@@ -64,8 +64,9 @@ end
 
 function obj.choicesPasteboardCommand(query)
     -- Return the choices that match the query, sorted by recency (most recent first)
+    -- Search against fullText (the complete content), not text (which is just the preview)
     local filtered = hs.fnutils.filter(obj.choices, function(choice)
-        return string.find(string.lower(choice["text"]), string.lower(query))
+        return string.find(string.lower(choice["fullText"]), string.lower(query))
     end)
 
     -- Sort by timestamp descending (most recent first)
@@ -76,12 +77,41 @@ function obj.choicesPasteboardCommand(query)
     return filtered
 end
 
+-- Creates a preview of text showing only the first few non-whitespace-only lines
+-- @param text string The full text to preview
+-- @param maxLines number Maximum number of non-whitespace-only lines to include (default 3)
+-- @return string The preview text
+local function createPreview(text, maxLines)
+    maxLines = maxLines or 3
+    local lines = {}
+    local count = 0
+
+    for line in text:gmatch("[^\r\n]*") do
+        -- Check if line has any non-whitespace characters
+        if line:match("%S") then
+            table.insert(lines, line)
+            count = count + 1
+            if count >= maxLines then
+                break
+            end
+        end
+    end
+
+    local preview = table.concat(lines, "\n")
+    -- Indicate truncation if the original text is longer
+    if #preview < #text then
+        preview = preview .. " ..."
+    end
+    return preview
+end
+
 function obj.pasteboardToChoice(item)
     local choice = {}
 
+    local preview = createPreview(item["text"], 3)
     choice["uuid"] = item["uuid"]
-    choice["name"] = item["text"]
-    choice["text"] = item["text"]
+    choice["text"] = preview
+    choice["fullText"] = item["text"]
     choice["kind"] = kind
     choice["plugin"] = obj.__name
     choice["type"] = "copy"
@@ -110,7 +140,8 @@ function obj.completionCallback(rowInfo)
     if rowInfo["type"] == "copy" then
         -- Set to clipboard - checkPasteboard will automatically detect this
         -- and update the timestamp + move it to the end (most recent position)
-        hs.pasteboard.setContents(rowInfo["name"])
+        -- Use "fullText" which contains the full content, not "text" which is just the preview
+        hs.pasteboard.setContents(rowInfo["fullText"])
     end
 end
 
