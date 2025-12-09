@@ -547,6 +547,9 @@ function obj.completionCallback(rowInfo)
             break
         end
     end
+
+    -- Clear the search query after selection so it doesn't persist next time
+    obj.chooser:query("")
 end
 
 function obj.choicesCallback()
