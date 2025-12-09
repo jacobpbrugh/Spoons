@@ -142,6 +142,16 @@ function obj.completionCallback(rowInfo)
         -- and update the timestamp + move it to the end (most recent position)
         -- Use "fullText" which contains the full content, not "text" which is just the preview
         hs.pasteboard.setContents(rowInfo["fullText"])
+
+        -- Clear the search query so it doesn't persist next time
+        if obj.seal and obj.seal.chooser then
+            obj.seal.chooser:query("")
+        end
+
+        -- Paste immediately after a short delay to ensure clipboard is set
+        hs.timer.doAfter(0.05, function()
+            hs.eventtap.keyStroke({"cmd"}, "v")
+        end)
     end
 end
 
