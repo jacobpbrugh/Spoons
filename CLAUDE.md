@@ -168,6 +168,113 @@ GitHub Actions automatically:
 - Runs `gh_actions_publish.sh` to rebuild docs and zips
 - Auto-commits if push to master
 
+## Development and Publishing Workflow
+
+### How SpoonInstall Works
+
+The Hammerspoon config (`~/.config/hammerspoon/init.lua`) uses SpoonInstall to auto-update Spoons:
+```lua
+hs.loadSpoon("SpoonInstall")
+Install = spoon.SpoonInstall
+Install.repos.default = {
+    url = "https://github.com/jacobpbrugh/Spoons",
+    desc = "My Hammerspoon Spoon repository",
+    branch = "master",
+}
+Install.use_syncinstall = true
+Install:updateAllRepos()
+Install:installSpoonFromRepo("Seal")
+```
+
+**Critical:** SpoonInstall downloads from `Spoons/*.spoon.zip` files, NOT from `Source/`. The CI pipeline rebuilds these zips when you push to master.
+
+### Testing and Publishing Changes
+
+**Complete workflow:**
+
+1. **Edit source files** in `Source/<SpoonName>.spoon/`
+   ```bash
+   # Example: editing Seal pasteboard plugin
+   vim Source/Seal.spoon/seal_pasteboard.lua
+   ```
+
+2. **Commit changes** (one logical commit per change)
+   ```bash
+   git add Source/Seal.spoon/seal_pasteboard.lua
+   git commit -m "Seal pasteboard: Add preview for large entries"
+   ```
+
+3. **Push to GitHub** and wait for CI
+   ```bash
+   git push
+   # Watch CI at: https://github.com/jacobpbrugh/Spoons/actions
+   ```
+
+4. **If CI fails**, fix the issue, amend, and force push:
+   ```bash
+   # Make fixes...
+   git add -A
+   git commit --amend --no-edit
+   git push --force-with-lease
+   ```
+
+5. **Once CI passes**, restart Hammerspoon
+   - Quit Hammerspoon completely (menu bar → Quit)
+   - Reopen Hammerspoon
+   - SpoonInstall will download the updated zip
+
+### Git Commit Style
+
+**One commit per conceptual change.** When iterating on a fix:
+- Use `git commit --amend --no-edit` to update the existing commit
+- Use `git push --force-with-lease` to update the remote
+- This keeps history clean and makes CI easier to follow
+
+**Example iteration:**
+```bash
+# Initial commit
+git add -A && git commit -m "Seal: Add clipboard preview feature"
+git push
+
+# CI fails due to doc lint...
+# Fix the issue
+git add -A && git commit --amend --no-edit
+git push --force-with-lease
+
+# CI passes, done!
+```
+
+### Common CI Failures
+
+**"Unable to find module for: X"** - Doc linter error
+- Cause: Using `---` (triple dash) comments on non-API functions
+- Fix: Use `--` (double dash) for internal/local function comments
+- `---` comments are parsed as Hammerspoon API documentation
+
+**Example fix:**
+```lua
+-- WRONG: triggers doc linter
+--- Creates a preview of text
+local function createPreview(text)
+
+-- CORRECT: internal function, use double dash
+-- Creates a preview of text
+local function createPreview(text)
+```
+
+### Quick Reference
+
+| Step | Command |
+|------|---------|
+| Edit source | `vim Source/Seal.spoon/seal_pasteboard.lua` |
+| Stage changes | `git add Source/Seal.spoon/` |
+| Commit | `git commit -m "Description"` |
+| Push | `git push` |
+| Fix + amend | `git add -A && git commit --amend --no-edit` |
+| Force push | `git push --force-with-lease` |
+| Check CI | https://github.com/jacobpbrugh/Spoons/actions |
+| Apply changes | Quit and restart Hammerspoon |
+
 ## Common Spoon Patterns
 
 ### Initialization
