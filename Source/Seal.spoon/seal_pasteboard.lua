@@ -108,7 +108,7 @@ end
 function obj.pasteboardToChoice(item)
     local choice = {}
 
-    local preview = createPreview(item["text"], 3)
+    local preview = createPreview(item["text"], 10)
     choice["uuid"] = item["uuid"]
     choice["text"] = preview
     choice["fullText"] = item["text"]
