@@ -2727,9 +2727,9 @@
     "type": "Method"
   },
   {
-    "desc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)",
+    "desc": "Sort choices using multi-level ranking with explicit precedence",
     "module": "Seal",
-    "name": "sortChoicesByFrecency",
+    "name": "sortChoices",
     "type": "Method"
   },
   {

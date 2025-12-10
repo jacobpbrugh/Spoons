@@ -18138,7 +18138,7 @@
         "doc_gfm": "<p>Binds hotkeys for Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>mapping - A table containing hotkey modifier/key details for the following (optional) items:</li>\n<li>show - This will cause Seal's UI to be shown</li>\n<li>toggle - This will cause Seal's UI to be shown or hidden depending on its current state</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "352",
+        "lineno": "389",
         "name": "bindHotkeys",
         "notes": [],
         "notes_gfm": "",
@@ -18189,7 +18189,7 @@
         "doc_gfm": "<p>Clear all usage history (reset recency tracking)</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "226",
+        "lineno": "263",
         "name": "clearFrecencyData",
         "notes": [],
         "notes_gfm": "",
@@ -18239,7 +18239,7 @@
         "doc_gfm": "<p>Loads a plugin from a given file</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin, without &quot;seal_&quot; at the beginning or &quot;.lua&quot; at the end</li>\n<li>file - the file where the plugin code is stored.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object if the plugin was successfully loaded, <code>nil</code> otherwise</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>You should normally use <code>Seal:loadPlugins()</code>. This method allows you to load plugins\nfrom non-standard locations and is mostly a development interface.</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "286",
+        "lineno": "323",
         "name": "loadPluginFromFile",
         "notes": [
           " * You should normally use `Seal:loadPlugins()`. This method allows you to load plugins",
@@ -18269,7 +18269,7 @@
         "doc_gfm": "<p>Loads a list of Seal plugins</p>\n<p>Parameters:</p>\n<ul>\n<li>plugins - A list containing the names of plugins to load</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>The plugins live inside the Seal.spoon directory</li>\n<li>The plugin names in the list, should not have <code>seal_</code> at the start, or <code>.lua</code> at the end</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "314",
+        "lineno": "351",
         "name": "loadPlugins",
         "notes": [
           " * The plugins live inside the Seal.spoon directory",
@@ -18324,7 +18324,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by all the currently loaded plugins.</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "267",
+        "lineno": "304",
         "name": "refreshAllCommands",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -18351,7 +18351,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by the given plugin.</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin. Should be the name as passed to <code>loadPlugins()</code> or <code>loadPluginFromFile</code>.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "242",
+        "lineno": "279",
         "name": "refreshCommandsForPlugin",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -18403,7 +18403,7 @@
         "doc_gfm": "<p>Shows the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This may be useful if you wish to show Seal in response to something other than its hotkey</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "429",
+        "lineno": "466",
         "name": "show",
         "notes": [
           " * This may be useful if you wish to show Seal in response to something other than its hotkey"
@@ -18430,7 +18430,7 @@
         "doc_gfm": "<p>Shows the Seal UI with clipboard history results directly (no command prefix)</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This is useful for creating a dedicated hotkey to browse clipboard history</li>\n<li>The search box will be empty but will filter clipboard items as you type</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "465",
+        "lineno": "502",
         "name": "showPasteboard",
         "notes": [
           " * This is useful for creating a dedicated hotkey to browse clipboard history",
@@ -18450,28 +18450,36 @@
         "type": "Method"
       },
       {
-        "def": "Seal:sortChoicesByFrecency(choices, query)",
-        "def_gfm": "Seal:sortChoicesByFrecency(choices, query)",
-        "desc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)",
-        "desc_gfm": "<p>Sort a list of choices by recency (items used before appear first, sorted by most recent)</p>\n",
-        "doc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)\n\nParameters:\n * choices - A table of choice items\n * query - The current query string (unused, kept for API compatibility)\n\nReturns:\n * The sorted choices table",
-        "doc_gfm": "<p>Sort a list of choices by recency (items used before appear first, sorted by most recent)</p>\n<p>Parameters:</p>\n<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The sorted choices table</li>\n</ul>\n",
+        "def": "Seal:sortChoices(choices, query)",
+        "def_gfm": "Seal:sortChoices(choices, query)",
+        "desc": "Sort choices using multi-level ranking with explicit precedence",
+        "desc_gfm": "<p>Sort choices using multi-level ranking with explicit precedence</p>\n",
+        "doc": "Sort choices using multi-level ranking with explicit precedence\n\nParameters:\n * choices - A table of choice items\n * query - The current query string (used for prefix matching)\n\nReturns:\n * The sorted choices table\n\nNotes:\n * Ranking dimensions in order of precedence:\n   1. Priority tier - High-priority plugins (score >= 50000) always win\n   2. Frecency - Previously selected items ranked by most recent use\n   3. Prefix match - Items starting with query beat substring matches\n   4. Alphabetical - Final tiebreaker for consistent ordering\n * To add new ranking dimensions, insert a comparison block at the\n   appropriate precedence level in the sort comparator",
+        "doc_gfm": "<p>Sort choices using multi-level ranking with explicit precedence</p>\n<p>Parameters:</p>\n<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (used for prefix matching)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The sorted choices table</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Ranking dimensions in order of precedence:<ol>\n<li>Priority tier - High-priority plugins (score &gt;= 50000) always win</li>\n<li>Frecency - Previously selected items ranked by most recent use</li>\n<li>Prefix match - Items starting with query beat substring matches</li>\n<li>Alphabetical - Final tiebreaker for consistent ordering</li>\n</ol>\n</li>\n<li>To add new ranking dimensions, insert a comparison block at the\nappropriate precedence level in the sort comparator</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
         "lineno": "180",
-        "name": "sortChoicesByFrecency",
-        "notes": [],
-        "notes_gfm": "",
+        "name": "sortChoices",
+        "notes": [
+          " * Ranking dimensions in order of precedence:",
+          "   1. Priority tier - High-priority plugins (score >= 50000) always win",
+          "   2. Frecency - Previously selected items ranked by most recent use",
+          "   3. Prefix match - Items starting with query beat substring matches",
+          "   4. Alphabetical - Final tiebreaker for consistent ordering",
+          " * To add new ranking dimensions, insert a comparison block at the",
+          "   appropriate precedence level in the sort comparator"
+        ],
+        "notes_gfm": "<ul>\n<li>Ranking dimensions in order of precedence:<ol>\n<li>Priority tier - High-priority plugins (score &gt;= 50000) always win</li>\n<li>Frecency - Previously selected items ranked by most recent use</li>\n<li>Prefix match - Items starting with query beat substring matches</li>\n<li>Alphabetical - Final tiebreaker for consistent ordering</li>\n</ol>\n</li>\n<li>To add new ranking dimensions, insert a comparison block at the\nappropriate precedence level in the sort comparator</li>\n</ul>\n",
         "parameters": [
           " * choices - A table of choice items",
-          " * query - The current query string (unused, kept for API compatibility)"
+          " * query - The current query string (used for prefix matching)"
         ],
-        "parameters_gfm": "<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n",
+        "parameters_gfm": "<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (used for prefix matching)</li>\n</ul>\n",
         "returns": [
           " * The sorted choices table"
         ],
         "returns_gfm": "<ul>\n<li>The sorted choices table</li>\n</ul>\n",
-        "signature": "Seal:sortChoicesByFrecency(choices, query)",
+        "signature": "Seal:sortChoices(choices, query)",
         "stripped_doc": "",
         "type": "Method"
       },
@@ -18484,7 +18492,7 @@
         "doc_gfm": "<p>Starts Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "385",
+        "lineno": "422",
         "name": "start",
         "notes": [],
         "notes_gfm": "",
@@ -18509,7 +18517,7 @@
         "doc_gfm": "<p>Stops Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "405",
+        "lineno": "442",
         "name": "stop",
         "notes": [
           " * Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)"
@@ -18536,7 +18544,7 @@
         "doc_gfm": "<p>Shows or hides the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "447",
+        "lineno": "484",
         "name": "toggle",
         "notes": [],
         "notes_gfm": "",
@@ -18639,7 +18647,7 @@
         "doc_gfm": "<p>Binds hotkeys for Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>mapping - A table containing hotkey modifier/key details for the following (optional) items:</li>\n<li>show - This will cause Seal's UI to be shown</li>\n<li>toggle - This will cause Seal's UI to be shown or hidden depending on its current state</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "352",
+        "lineno": "389",
         "name": "bindHotkeys",
         "notes": [],
         "notes_gfm": "",
@@ -18690,7 +18698,7 @@
         "doc_gfm": "<p>Clear all usage history (reset recency tracking)</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "226",
+        "lineno": "263",
         "name": "clearFrecencyData",
         "notes": [],
         "notes_gfm": "",
@@ -18778,7 +18786,7 @@
         "doc_gfm": "<p>Loads a plugin from a given file</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin, without &quot;seal_&quot; at the beginning or &quot;.lua&quot; at the end</li>\n<li>file - the file where the plugin code is stored.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object if the plugin was successfully loaded, <code>nil</code> otherwise</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>You should normally use <code>Seal:loadPlugins()</code>. This method allows you to load plugins\nfrom non-standard locations and is mostly a development interface.</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "286",
+        "lineno": "323",
         "name": "loadPluginFromFile",
         "notes": [
           " * You should normally use `Seal:loadPlugins()`. This method allows you to load plugins",
@@ -18808,7 +18816,7 @@
         "doc_gfm": "<p>Loads a list of Seal plugins</p>\n<p>Parameters:</p>\n<ul>\n<li>plugins - A list containing the names of plugins to load</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>The plugins live inside the Seal.spoon directory</li>\n<li>The plugin names in the list, should not have <code>seal_</code> at the start, or <code>.lua</code> at the end</li>\n<li>Some plugins may immediately begin doing background work (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "314",
+        "lineno": "351",
         "name": "loadPlugins",
         "notes": [
           " * The plugins live inside the Seal.spoon directory",
@@ -18895,7 +18903,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by all the currently loaded plugins.</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "267",
+        "lineno": "304",
         "name": "refreshAllCommands",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -18922,7 +18930,7 @@
         "doc_gfm": "<p>Refresh the list of commands provided by the given plugin.</p>\n<p>Parameters:</p>\n<ul>\n<li>plugin_name - the name of the plugin. Should be the name as passed to <code>loadPlugins()</code> or <code>loadPluginFromFile</code>.</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands.</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "242",
+        "lineno": "279",
         "name": "refreshCommandsForPlugin",
         "notes": [
           " * Most Seal plugins expose a static list of commands (if any), which are registered at the time the plugin is loaded. This method is used for plugins which expose a dynamic or changing (e.g. depending on configuration) list of commands."
@@ -18974,7 +18982,7 @@
         "doc_gfm": "<p>Shows the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This may be useful if you wish to show Seal in response to something other than its hotkey</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "429",
+        "lineno": "466",
         "name": "show",
         "notes": [
           " * This may be useful if you wish to show Seal in response to something other than its hotkey"
@@ -19001,7 +19009,7 @@
         "doc_gfm": "<p>Shows the Seal UI with clipboard history results directly (no command prefix)</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>This is useful for creating a dedicated hotkey to browse clipboard history</li>\n<li>The search box will be empty but will filter clipboard items as you type</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "465",
+        "lineno": "502",
         "name": "showPasteboard",
         "notes": [
           " * This is useful for creating a dedicated hotkey to browse clipboard history",
@@ -19021,28 +19029,36 @@
         "type": "Method"
       },
       {
-        "def": "Seal:sortChoicesByFrecency(choices, query)",
-        "def_gfm": "Seal:sortChoicesByFrecency(choices, query)",
-        "desc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)",
-        "desc_gfm": "<p>Sort a list of choices by recency (items used before appear first, sorted by most recent)</p>\n",
-        "doc": "Sort a list of choices by recency (items used before appear first, sorted by most recent)\n\nParameters:\n * choices - A table of choice items\n * query - The current query string (unused, kept for API compatibility)\n\nReturns:\n * The sorted choices table",
-        "doc_gfm": "<p>Sort a list of choices by recency (items used before appear first, sorted by most recent)</p>\n<p>Parameters:</p>\n<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The sorted choices table</li>\n</ul>\n",
+        "def": "Seal:sortChoices(choices, query)",
+        "def_gfm": "Seal:sortChoices(choices, query)",
+        "desc": "Sort choices using multi-level ranking with explicit precedence",
+        "desc_gfm": "<p>Sort choices using multi-level ranking with explicit precedence</p>\n",
+        "doc": "Sort choices using multi-level ranking with explicit precedence\n\nParameters:\n * choices - A table of choice items\n * query - The current query string (used for prefix matching)\n\nReturns:\n * The sorted choices table\n\nNotes:\n * Ranking dimensions in order of precedence:\n   1. Priority tier - High-priority plugins (score >= 50000) always win\n   2. Frecency - Previously selected items ranked by most recent use\n   3. Prefix match - Items starting with query beat substring matches\n   4. Alphabetical - Final tiebreaker for consistent ordering\n * To add new ranking dimensions, insert a comparison block at the\n   appropriate precedence level in the sort comparator",
+        "doc_gfm": "<p>Sort choices using multi-level ranking with explicit precedence</p>\n<p>Parameters:</p>\n<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (used for prefix matching)</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The sorted choices table</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Ranking dimensions in order of precedence:<ol>\n<li>Priority tier - High-priority plugins (score &gt;= 50000) always win</li>\n<li>Frecency - Previously selected items ranked by most recent use</li>\n<li>Prefix match - Items starting with query beat substring matches</li>\n<li>Alphabetical - Final tiebreaker for consistent ordering</li>\n</ol>\n</li>\n<li>To add new ranking dimensions, insert a comparison block at the\nappropriate precedence level in the sort comparator</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
         "lineno": "180",
-        "name": "sortChoicesByFrecency",
-        "notes": [],
-        "notes_gfm": "",
+        "name": "sortChoices",
+        "notes": [
+          " * Ranking dimensions in order of precedence:",
+          "   1. Priority tier - High-priority plugins (score >= 50000) always win",
+          "   2. Frecency - Previously selected items ranked by most recent use",
+          "   3. Prefix match - Items starting with query beat substring matches",
+          "   4. Alphabetical - Final tiebreaker for consistent ordering",
+          " * To add new ranking dimensions, insert a comparison block at the",
+          "   appropriate precedence level in the sort comparator"
+        ],
+        "notes_gfm": "<ul>\n<li>Ranking dimensions in order of precedence:<ol>\n<li>Priority tier - High-priority plugins (score &gt;= 50000) always win</li>\n<li>Frecency - Previously selected items ranked by most recent use</li>\n<li>Prefix match - Items starting with query beat substring matches</li>\n<li>Alphabetical - Final tiebreaker for consistent ordering</li>\n</ol>\n</li>\n<li>To add new ranking dimensions, insert a comparison block at the\nappropriate precedence level in the sort comparator</li>\n</ul>\n",
         "parameters": [
           " * choices - A table of choice items",
-          " * query - The current query string (unused, kept for API compatibility)"
+          " * query - The current query string (used for prefix matching)"
         ],
-        "parameters_gfm": "<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (unused, kept for API compatibility)</li>\n</ul>\n",
+        "parameters_gfm": "<ul>\n<li>choices - A table of choice items</li>\n<li>query - The current query string (used for prefix matching)</li>\n</ul>\n",
         "returns": [
           " * The sorted choices table"
         ],
         "returns_gfm": "<ul>\n<li>The sorted choices table</li>\n</ul>\n",
-        "signature": "Seal:sortChoicesByFrecency(choices, query)",
+        "signature": "Seal:sortChoices(choices, query)",
         "stripped_doc": "",
         "type": "Method"
       },
@@ -19055,7 +19071,7 @@
         "doc_gfm": "<p>Starts Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "385",
+        "lineno": "422",
         "name": "start",
         "notes": [],
         "notes_gfm": "",
@@ -19080,7 +19096,7 @@
         "doc_gfm": "<p>Stops Seal</p>\n<p>Parameters:</p>\n<ul>\n<li>None</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>The Seal object</li>\n</ul>\n<p>Notes:</p>\n<ul>\n<li>Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "405",
+        "lineno": "442",
         "name": "stop",
         "notes": [
           " * Some Seal plugins will continue performing background work even after this call (e.g. Spotlight searches)"
@@ -19107,7 +19123,7 @@
         "doc_gfm": "<p>Shows or hides the Seal UI</p>\n<p>Parameters:</p>\n<ul>\n<li>query - An optional string to pre-populate the query box with</li>\n</ul>\n<p>Returns:</p>\n<ul>\n<li>None</li>\n</ul>\n",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
-        "lineno": "447",
+        "lineno": "484",
         "name": "toggle",
         "notes": [],
         "notes_gfm": "",
