@@ -177,50 +177,87 @@ function obj:calculateFrecencyScore(uuid, query)
     return self.frecency_data[uuid].last_used or 0
 end
 
---- Seal:sortChoicesByFrecency(choices, query)
+--- Seal:sortChoices(choices, query)
 --- Method
---- Sort a list of choices by recency (items used before appear first, sorted by most recent)
+--- Sort choices using multi-level ranking with explicit precedence
 ---
 --- Parameters:
 ---  * choices - A table of choice items
----  * query - The current query string (unused, kept for API compatibility)
+---  * query - The current query string (used for prefix matching)
 ---
 --- Returns:
 ---  * The sorted choices table
-function obj:sortChoicesByFrecency(choices, query)
-    if not self.frecency_enable then
-        return choices
-    end
-
-    -- Calculate recency score for each choice
-    for _, choice in ipairs(choices) do
-        if choice.uuid then
-            choice.frecency_score = self:calculateFrecencyScore(choice.uuid, query)
-        else
-            choice.frecency_score = 0
-        end
-    end
-
-    -- Sort by plugin priority score first, then by frecency
-    -- Scores >= 50000 are considered "high priority" (e.g., calc results)
-    -- This ensures high-confidence plugin results appear first
+---
+--- Notes:
+---  * Ranking dimensions in order of precedence:
+---    1. Priority tier - High-priority plugins (score >= 50000) always win
+---    2. Frecency - Previously selected items ranked by most recent use
+---    3. Prefix match - Items starting with query beat substring matches
+---    4. Alphabetical - Final tiebreaker for consistent ordering
+---  * To add new ranking dimensions, insert a comparison block at the
+---    appropriate precedence level in the sort comparator
+function obj:sortChoices(choices, query)
     local HIGH_PRIORITY_THRESHOLD = 50000
-    table.sort(choices, function(a, b)
-        local score_a = a._score or 0
-        local score_b = b._score or 0
-        local high_pri_a = score_a >= HIGH_PRIORITY_THRESHOLD
-        local high_pri_b = score_b >= HIGH_PRIORITY_THRESHOLD
+    local query_lower = query and query:lower() or ""
 
-        -- If both are high priority or both are normal priority, sort by frecency
-        if high_pri_a == high_pri_b then
-            return (a.frecency_score or 0) > (b.frecency_score or 0)
+    -- Helper: check if text starts with query (prefix match)
+    local function isPrefixMatch(choice)
+        if query_lower == "" then return false end
+        local text = choice.text or ""
+        return text:lower():sub(1, #query_lower) == query_lower
+    end
+
+    -- Helper: get display text for alphabetical sorting
+    local function getSortText(choice)
+        return (choice.text or ""):lower()
+    end
+
+    -- Pre-compute ranking attributes for each choice
+    for _, choice in ipairs(choices) do
+        -- Priority tier (high priority = true)
+        choice._high_priority = (choice._score or 0) >= HIGH_PRIORITY_THRESHOLD
+
+        -- Frecency score (0 if never selected, timestamp if selected)
+        if self.frecency_enable and choice.uuid then
+            choice._frecency = self:calculateFrecencyScore(choice.uuid, query)
+        else
+            choice._frecency = 0
         end
 
-        -- Otherwise, high priority wins
-        return high_pri_a
+        -- Prefix match
+        choice._prefix_match = isPrefixMatch(choice)
+
+        -- Sort text
+        choice._sort_text = getSortText(choice)
+    end
+
+    -- Sort using multi-level comparison
+    table.sort(choices, function(a, b)
+        -- 1. High priority tier wins (calc results, etc.)
+        if a._high_priority ~= b._high_priority then
+            return a._high_priority
+        end
+
+        -- 2. Higher frecency wins (more recently used)
+        if a._frecency ~= b._frecency then
+            return a._frecency > b._frecency
+        end
+
+        -- 3. Prefix match wins (when frecency is equal)
+        if a._prefix_match ~= b._prefix_match then
+            return a._prefix_match
+        end
+
+        -- 4. Alphabetical (final tiebreaker)
+        return a._sort_text < b._sort_text
     end)
 
     return choices
+end
+
+-- Backwards compatibility alias
+function obj:sortChoicesByFrecency(choices, query)
+    return self:sortChoices(choices, query)
 end
 
 --- Seal:clearFrecencyData()
@@ -605,10 +642,8 @@ function obj.choicesCallback()
         end
     end
 
-    -- Sort by frecency if enabled
-    if obj.frecency_enable then
-        obj:sortChoicesByFrecency(choices, query)
-    end
+    -- Sort choices (priority tier > frecency > prefix match > alphabetical)
+    obj:sortChoices(choices, query)
 
     return choices
 end
