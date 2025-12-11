@@ -191,8 +191,8 @@ end
 --- Notes:
 ---  * Ranking dimensions in order of precedence:
 ---    1. Priority tier - High-priority plugins (score >= 50000) always win
----    2. Frecency - Previously selected items ranked by most recent use
----    3. Prefix match - Items starting with query beat substring matches
+---    2. Prefix match - Items starting with query beat substring matches
+---    3. Frecency - Previously selected items ranked by most recent use
 ---    4. Alphabetical - Final tiebreaker for consistent ordering
 ---  * To add new ranking dimensions, insert a comparison block at the
 ---    appropriate precedence level in the sort comparator
@@ -203,13 +203,13 @@ function obj:sortChoices(choices, query)
     -- Helper: check if text starts with query (prefix match)
     local function isPrefixMatch(choice)
         if query_lower == "" then return false end
-        local text = choice.text or ""
+        local text = tostring(choice.text or "")
         return text:lower():sub(1, #query_lower) == query_lower
     end
 
     -- Helper: get display text for alphabetical sorting
     local function getSortText(choice)
-        return (choice.text or ""):lower()
+        return tostring(choice.text or ""):lower()
     end
 
     -- Pre-compute ranking attributes for each choice
@@ -238,14 +238,14 @@ function obj:sortChoices(choices, query)
             return a._high_priority
         end
 
-        -- 2. Higher frecency wins (more recently used)
-        if a._frecency ~= b._frecency then
-            return a._frecency > b._frecency
-        end
-
-        -- 3. Prefix match wins (when frecency is equal)
+        -- 2. Prefix match wins
         if a._prefix_match ~= b._prefix_match then
             return a._prefix_match
+        end
+
+        -- 3. Higher frecency wins (more recently used)
+        if a._frecency ~= b._frecency then
+            return a._frecency > b._frecency
         end
 
         -- 4. Alphabetical (final tiebreaker)
@@ -642,7 +642,7 @@ function obj.choicesCallback()
         end
     end
 
-    -- Sort choices (priority tier > frecency > prefix match > alphabetical)
+    -- Sort choices (priority tier > prefix match > frecency > alphabetical)
     obj:sortChoices(choices, query)
 
     return choices
