@@ -26,16 +26,28 @@ function obj.bareCalc(query)
         local choice = {}
         local compile_result, fn = load("return " .. query)
         if type(compile_result) == "function" then
-            local result = compile_result()
-            choice["text"] = result
-            choice["subText"] = "Copy result to clipboard"
-            choice["image"] = obj.icon
-            choice["plugin"] = obj.__name
-            choice["type"] = "copyToClipboard"
-            choice["uuid"] = obj.__name .. "__" .. query  -- For frecency tracking
-            choice["_score"] = 100000  -- Very high score to prioritize calc over other plugins
-            table.insert(choices, choice)
+            local success, result = pcall(compile_result)
+            if success and result ~= nil then
+                choice["text"] = result
+                choice["subText"] = "Copy result to clipboard"
+                choice["type"] = "copyToClipboard"
+            else
+                -- Incomplete expression - show placeholder to keep calc at top
+                choice["text"] = query .. " ..."
+                choice["subText"] = "Continue typing expression"
+                choice["type"] = "incomplete"
+            end
+        else
+            -- Can't compile - show placeholder to keep calc at top
+            choice["text"] = query .. " ..."
+            choice["subText"] = "Continue typing expression"
+            choice["type"] = "incomplete"
         end
+        choice["image"] = obj.icon
+        choice["plugin"] = obj.__name
+        choice["uuid"] = obj.__name .. "__" .. query  -- For frecency tracking
+        choice["_score"] = 100000  -- Very high score to prioritize calc over other plugins
+        table.insert(choices, choice)
     end
     return choices
 end
