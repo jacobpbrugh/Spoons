@@ -14584,7 +14584,7 @@
       {
         "def": "Seal:sortChoices(choices, query)",
         "desc": "Sort choices using multi-level ranking with explicit precedence",
-        "doc": "Sort choices using multi-level ranking with explicit precedence\n\nParameters:\n * choices - A table of choice items\n * query - The current query string (used for prefix matching)\n\nReturns:\n * The sorted choices table\n\nNotes:\n * Ranking dimensions in order of precedence:\n   1. Priority tier - High-priority plugins (score >= 50000) always win\n   2. Frecency - Previously selected items ranked by most recent use\n   3. Prefix match - Items starting with query beat substring matches\n   4. Alphabetical - Final tiebreaker for consistent ordering\n * To add new ranking dimensions, insert a comparison block at the\n   appropriate precedence level in the sort comparator",
+        "doc": "Sort choices using multi-level ranking with explicit precedence\n\nParameters:\n * choices - A table of choice items\n * query - The current query string (used for prefix matching)\n\nReturns:\n * The sorted choices table\n\nNotes:\n * Ranking dimensions in order of precedence:\n   1. Priority tier - High-priority plugins (score >= 50000) always win\n   2. Prefix match - Items starting with query beat substring matches\n   3. Frecency - Previously selected items ranked by most recent use\n   4. Alphabetical - Final tiebreaker for consistent ordering\n * To add new ranking dimensions, insert a comparison block at the\n   appropriate precedence level in the sort comparator",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
         "lineno": "180",
@@ -14592,8 +14592,8 @@
         "notes": [
           " * Ranking dimensions in order of precedence:",
           "   1. Priority tier - High-priority plugins (score >= 50000) always win",
-          "   2. Frecency - Previously selected items ranked by most recent use",
-          "   3. Prefix match - Items starting with query beat substring matches",
+          "   2. Prefix match - Items starting with query beat substring matches",
+          "   3. Frecency - Previously selected items ranked by most recent use",
           "   4. Alphabetical - Final tiebreaker for consistent ordering",
           " * To add new ranking dimensions, insert a comparison block at the",
           "   appropriate precedence level in the sort comparator"
@@ -15035,7 +15035,7 @@
       {
         "def": "Seal:sortChoices(choices, query)",
         "desc": "Sort choices using multi-level ranking with explicit precedence",
-        "doc": "Sort choices using multi-level ranking with explicit precedence\n\nParameters:\n * choices - A table of choice items\n * query - The current query string (used for prefix matching)\n\nReturns:\n * The sorted choices table\n\nNotes:\n * Ranking dimensions in order of precedence:\n   1. Priority tier - High-priority plugins (score >= 50000) always win\n   2. Frecency - Previously selected items ranked by most recent use\n   3. Prefix match - Items starting with query beat substring matches\n   4. Alphabetical - Final tiebreaker for consistent ordering\n * To add new ranking dimensions, insert a comparison block at the\n   appropriate precedence level in the sort comparator",
+        "doc": "Sort choices using multi-level ranking with explicit precedence\n\nParameters:\n * choices - A table of choice items\n * query - The current query string (used for prefix matching)\n\nReturns:\n * The sorted choices table\n\nNotes:\n * Ranking dimensions in order of precedence:\n   1. Priority tier - High-priority plugins (score >= 50000) always win\n   2. Prefix match - Items starting with query beat substring matches\n   3. Frecency - Previously selected items ranked by most recent use\n   4. Alphabetical - Final tiebreaker for consistent ordering\n * To add new ranking dimensions, insert a comparison block at the\n   appropriate precedence level in the sort comparator",
         "examples": [],
         "file": "Source/Seal.spoon/init.lua",
         "lineno": "180",
@@ -15043,8 +15043,8 @@
         "notes": [
           " * Ranking dimensions in order of precedence:",
           "   1. Priority tier - High-priority plugins (score >= 50000) always win",
-          "   2. Frecency - Previously selected items ranked by most recent use",
-          "   3. Prefix match - Items starting with query beat substring matches",
+          "   2. Prefix match - Items starting with query beat substring matches",
+          "   3. Frecency - Previously selected items ranked by most recent use",
           "   4. Alphabetical - Final tiebreaker for consistent ordering",
           " * To add new ranking dimensions, insert a comparison block at the",
           "   appropriate precedence level in the sort comparator"
