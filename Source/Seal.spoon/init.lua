@@ -687,6 +687,52 @@ function obj.choicesCallback()
         end
     end
 
+    -- Inject pinned apps that might not match the query naturally
+    local query_lower = query:lower()
+    for prefix, pinned_name in pairs(obj.pinnedPrefixes or {}) do
+        local prefix_lower = prefix:lower()
+        -- Check if query starts with this pinned prefix
+        if query_lower:sub(1, #prefix_lower) == prefix_lower then
+            -- Check if this pinned result is already in choices
+            local already_present = false
+            local pinned_lower = pinned_name:lower()
+            for _, choice in ipairs(choices) do
+                local choice_text = tostring(choice.text or ""):lower()
+                if choice_text:find(pinned_lower, 1, true) then
+                    already_present = true
+                    break
+                end
+            end
+            -- If not present, try to inject it from the apps cache
+            if not already_present and obj.plugins.apps and obj.plugins.apps.appCache then
+                for name, app in pairs(obj.plugins.apps.appCache) do
+                    if name:lower():find(pinned_lower, 1, true) then
+                        local choice = {}
+                        local instances = {}
+                        if app["bundleID"] then
+                            instances = hs.application.applicationsForBundleID(app["bundleID"])
+                        end
+                        if #instances > 0 then
+                            choice["text"] = name .. " (Running)"
+                        else
+                            choice["text"] = name
+                        end
+                        choice["subText"] = app["path"]
+                        if app["icon"] then
+                            choice["image"] = app["icon"]
+                        end
+                        choice["path"] = app["path"]
+                        choice["uuid"] = "seal_apps__" .. (app["bundleID"] or name)
+                        choice["plugin"] = "seal_apps"
+                        choice["type"] = "launchOrFocus"
+                        table.insert(choices, choice)
+                        break
+                    end
+                end
+            end
+        end
+    end
+
     -- Sort choices (priority > pinned > prefix match > frecency > alphabetical)
     obj:sortChoices(choices, query)
 
