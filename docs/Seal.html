@@ -41,6 +41,7 @@
           <ul>
             <li><a href="#frecency_enable">frecency_enable</a></li>
             <li><a href="#frecency_storage_path">frecency_storage_path</a></li>
+            <li><a href="#pinnedPrefixes">pinnedPrefixes</a></li>
             <li><a href="#plugin_search_paths">plugin_search_paths</a></li>
             <li><a href="#queryChangedTimerDuration">queryChangedTimerDuration</a></li>
           </ul>
@@ -125,6 +126,46 @@
               <tr>
                 <th>Source</th>
                 <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L61">Source/Seal.spoon/init.lua line 61</a></td>
+              </tr>
+            </table>
+          </section>
+          <section id="pinnedPrefixes">
+            <a name="//apple_ref/cpp/Variable/pinnedPrefixes" class="dashAnchor"></a>
+            <h5><a href="#pinnedPrefixes">pinnedPrefixes</a></h5>
+            <table>
+              <tr>
+                <th>Signature</th>
+                <td><code>Seal.pinnedPrefixes</code></td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>Variable</td>
+              </tr>
+              <tr>
+                <th>Description</th>
+                <td><p>A table mapping query prefixes to app/result names that should be pinned to the top</p>
+</td>
+              </tr>
+              <tr>
+                  <th>Notes</th>
+                  <td><ul>
+<li>Defaults to <code>{}</code> (no pinned prefixes)</li>
+<li>When the query starts with a pinned prefix, the matching result is boosted above normal prefix/frecency ranking</li>
+<li>Matching is case-insensitive</li>
+<li>Example configuration in init.lua:
+<pre><code>spoon.Seal.pinnedPrefixes = {
+    [&quot;vs&quot;] = &quot;Visual Studio Code&quot;,
+    [&quot;ff&quot;] = &quot;Firefox&quot;,
+    [&quot;cb&quot;] = &quot;Google Chrome&quot;,
+}
+</code></pre>
+</li>
+</ul>
+</td>
+              </tr>
+              <tr>
+                <th>Source</th>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L69">Source/Seal.spoon/init.lua line 69</a></td>
               </tr>
             </table>
           </section>
@@ -219,7 +260,7 @@
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L389">Source/Seal.spoon/init.lua line 389</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L434">Source/Seal.spoon/init.lua line 434</a></td>
               </tr>
             </table>
           </section>
@@ -257,7 +298,7 @@
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L157">Source/Seal.spoon/init.lua line 157</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L175">Source/Seal.spoon/init.lua line 175</a></td>
               </tr>
             </table>
           </section>
@@ -294,7 +335,7 @@
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L263">Source/Seal.spoon/init.lua line 263</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L308">Source/Seal.spoon/init.lua line 308</a></td>
               </tr>
             </table>
           </section>
@@ -331,7 +372,7 @@
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L72">Source/Seal.spoon/init.lua line 72</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L90">Source/Seal.spoon/init.lua line 90</a></td>
               </tr>
             </table>
           </section>
@@ -378,7 +419,7 @@ from non-standard locations and is mostly a development interface.</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L323">Source/Seal.spoon/init.lua line 323</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L368">Source/Seal.spoon/init.lua line 368</a></td>
               </tr>
             </table>
           </section>
@@ -424,7 +465,7 @@ from non-standard locations and is mostly a development interface.</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L351">Source/Seal.spoon/init.lua line 351</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L396">Source/Seal.spoon/init.lua line 396</a></td>
               </tr>
             </table>
           </section>
@@ -462,7 +503,7 @@ from non-standard locations and is mostly a development interface.</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L124">Source/Seal.spoon/init.lua line 124</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L142">Source/Seal.spoon/init.lua line 142</a></td>
               </tr>
             </table>
           </section>
@@ -506,7 +547,7 @@ from non-standard locations and is mostly a development interface.</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L304">Source/Seal.spoon/init.lua line 304</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L349">Source/Seal.spoon/init.lua line 349</a></td>
               </tr>
             </table>
           </section>
@@ -550,7 +591,7 @@ from non-standard locations and is mostly a development interface.</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L279">Source/Seal.spoon/init.lua line 279</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L324">Source/Seal.spoon/init.lua line 324</a></td>
               </tr>
             </table>
           </section>
@@ -587,7 +628,7 @@ from non-standard locations and is mostly a development interface.</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L99">Source/Seal.spoon/init.lua line 99</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L117">Source/Seal.spoon/init.lua line 117</a></td>
               </tr>
             </table>
           </section>
@@ -631,7 +672,7 @@ from non-standard locations and is mostly a development interface.</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L466">Source/Seal.spoon/init.lua line 466</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L511">Source/Seal.spoon/init.lua line 511</a></td>
               </tr>
             </table>
           </section>
@@ -676,7 +717,7 @@ from non-standard locations and is mostly a development interface.</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L502">Source/Seal.spoon/init.lua line 502</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L547">Source/Seal.spoon/init.lua line 547</a></td>
               </tr>
             </table>
           </section>
@@ -717,6 +758,7 @@ from non-standard locations and is mostly a development interface.</li>
                   <td><ul>
 <li>Ranking dimensions in order of precedence:<ol>
 <li>Priority tier - High-priority plugins (score &gt;= 50000) always win</li>
+<li>Pinned prefix - Results matching a configured pinnedPrefixes entry</li>
 <li>Prefix match - Items starting with query beat substring matches</li>
 <li>Frecency - Previously selected items ranked by most recent use</li>
 <li>Alphabetical - Final tiebreaker for consistent ordering</li>
@@ -729,7 +771,7 @@ appropriate precedence level in the sort comparator</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L180">Source/Seal.spoon/init.lua line 180</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L198">Source/Seal.spoon/init.lua line 198</a></td>
               </tr>
             </table>
           </section>
@@ -766,7 +808,7 @@ appropriate precedence level in the sort comparator</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L422">Source/Seal.spoon/init.lua line 422</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L467">Source/Seal.spoon/init.lua line 467</a></td>
               </tr>
             </table>
           </section>
@@ -810,7 +852,7 @@ appropriate precedence level in the sort comparator</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L442">Source/Seal.spoon/init.lua line 442</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L487">Source/Seal.spoon/init.lua line 487</a></td>
               </tr>
             </table>
           </section>
@@ -847,7 +889,7 @@ appropriate precedence level in the sort comparator</li>
               </tr>
               <tr>
                 <th>Source</th>
-                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L484">Source/Seal.spoon/init.lua line 484</a></td>
+                <td><a href="https://github.com/Hammerspoon/Spoons/blob/master/Source/Seal.spoon/init.lua#L529">Source/Seal.spoon/init.lua line 529</a></td>
               </tr>
             </table>
           </section>

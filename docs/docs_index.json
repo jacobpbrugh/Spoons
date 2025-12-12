@@ -2643,6 +2643,12 @@
     "type": "Variable"
   },
   {
+    "desc": "A table mapping query prefixes to app/result names that should be pinned to the top",
+    "module": "Seal",
+    "name": "pinnedPrefixes",
+    "type": "Variable"
+  },
+  {
     "desc": "List of directories where Seal will look for plugins. Defaults to `~/.hammerspoon/seal_plugins/` and the Seal Spoon directory.",
     "module": "Seal",
     "name": "plugin_search_paths",
