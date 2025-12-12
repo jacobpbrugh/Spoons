@@ -66,6 +66,24 @@ obj.frecency_enable = true
 ---  * Defaults to `~/.hammerspoon/seal_frecency.json`
 obj.frecency_storage_path = hs.configdir .. "/seal_frecency.json"
 
+--- Seal.pinnedPrefixes
+--- Variable
+--- A table mapping query prefixes to app/result names that should be pinned to the top
+---
+--- Notes:
+---  * Defaults to `{}` (no pinned prefixes)
+---  * When the query starts with a pinned prefix, the matching result is boosted above normal prefix/frecency ranking
+---  * Matching is case-insensitive
+---  * Example configuration in init.lua:
+---    ```
+---    spoon.Seal.pinnedPrefixes = {
+---        ["vs"] = "Visual Studio Code",
+---        ["ff"] = "Firefox",
+---        ["cb"] = "Google Chrome",
+---    }
+---    ```
+obj.pinnedPrefixes = {}
+
 -- Internal frecency data structure
 obj.frecency_data = {}
 
@@ -191,9 +209,10 @@ end
 --- Notes:
 ---  * Ranking dimensions in order of precedence:
 ---    1. Priority tier - High-priority plugins (score >= 50000) always win
----    2. Prefix match - Items starting with query beat substring matches
----    3. Frecency - Previously selected items ranked by most recent use
----    4. Alphabetical - Final tiebreaker for consistent ordering
+---    2. Pinned prefix - Results matching a configured pinnedPrefixes entry
+---    3. Prefix match - Items starting with query beat substring matches
+---    4. Frecency - Previously selected items ranked by most recent use
+---    5. Alphabetical - Final tiebreaker for consistent ordering
 ---  * To add new ranking dimensions, insert a comparison block at the
 ---    appropriate precedence level in the sort comparator
 function obj:sortChoices(choices, query)
@@ -207,6 +226,24 @@ function obj:sortChoices(choices, query)
         return text:lower():sub(1, #query_lower) == query_lower
     end
 
+    -- Helper: check if choice matches a pinned prefix for the current query
+    local function isPinnedMatch(choice)
+        if query_lower == "" then return false end
+        local choice_text = tostring(choice.text or ""):lower()
+        for prefix, pinned_name in pairs(self.pinnedPrefixes or {}) do
+            local prefix_lower = prefix:lower()
+            local pinned_lower = pinned_name:lower()
+            -- Check if query starts with the pinned prefix
+            if query_lower:sub(1, #prefix_lower) == prefix_lower then
+                -- Check if this choice matches the pinned name
+                if choice_text == pinned_lower or choice_text:find(pinned_lower, 1, true) then
+                    return true
+                end
+            end
+        end
+        return false
+    end
+
     -- Helper: get display text for alphabetical sorting
     local function getSortText(choice)
         return tostring(choice.text or ""):lower()
@@ -216,6 +253,9 @@ function obj:sortChoices(choices, query)
     for _, choice in ipairs(choices) do
         -- Priority tier (high priority = true)
         choice._high_priority = (choice._score or 0) >= HIGH_PRIORITY_THRESHOLD
+
+        -- Pinned prefix match
+        choice._pinned_match = isPinnedMatch(choice)
 
         -- Frecency score (0 if never selected, timestamp if selected)
         if self.frecency_enable and choice.uuid then
@@ -238,17 +278,22 @@ function obj:sortChoices(choices, query)
             return a._high_priority
         end
 
-        -- 2. Prefix match wins
+        -- 2. Pinned prefix match wins
+        if a._pinned_match ~= b._pinned_match then
+            return a._pinned_match
+        end
+
+        -- 3. Prefix match wins
         if a._prefix_match ~= b._prefix_match then
             return a._prefix_match
         end
 
-        -- 3. Higher frecency wins (more recently used)
+        -- 4. Higher frecency wins (more recently used)
         if a._frecency ~= b._frecency then
             return a._frecency > b._frecency
         end
 
-        -- 4. Alphabetical (final tiebreaker)
+        -- 5. Alphabetical (final tiebreaker)
         return a._sort_text < b._sort_text
     end)
 
@@ -642,7 +687,7 @@ function obj.choicesCallback()
         end
     end
 
-    -- Sort choices (priority tier > prefix match > frecency > alphabetical)
+    -- Sort choices (priority > pinned > prefix match > frecency > alphabetical)
     obj:sortChoices(choices, query)
 
     return choices
