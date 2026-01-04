@@ -26,14 +26,30 @@ obj.providers = {}
 -- }
 
 function obj:commands()
-    return {uf = {
-        cmd = "uf",
-        fn = obj.choicesURLPart,
-        name = "URL Formats",
-        description = "Open a full URL with a search term",
-        plugin = obj.__name
+    local cmds = {
+        uf = {
+            cmd = "uf",
+            fn = obj.choicesURLPart,
+            name = "URL Formats",
+            description = "Open a full URL with a search term",
+            plugin = obj.__name
         }
     }
+
+    -- Dynamically register commands for each provider
+    for provider_key, provider_data in pairs(obj.providers) do
+        if not cmds[provider_key] then
+            cmds[provider_key] = {
+                cmd = provider_key,
+                fn = hs.fnutils.partial(obj.choicesURLPartForProvider, provider_key),
+                name = provider_data.name,
+                description = "Open " .. provider_data.name .. " with search term",
+                plugin = obj.__name
+            }
+        end
+    end
+
+    return cmds
 end
 
 function obj:bare()
@@ -84,6 +100,31 @@ function obj.choicesURLPart(query)
     return choices
 end
 
+function obj.choicesURLPartForProvider(provider_key, query)
+    --print("choicesURLPartForProvider for provider: "..provider_key..", query: "..query)
+    local choices = {}
+    local data = obj.providers[provider_key]
+
+    if not data then
+        return choices
+    end
+
+    local data_url = data["url"]:gsub("([^%%])%%([^s])", "%1%%%%%2")
+    local full_url = string.format(data_url, query)
+    local url_scheme = string.sub(full_url, 1, string.find(full_url, "://") - 1)
+    local choice = {}
+    choice["text"] = data["name"]
+    choice["subText"] = full_url
+    choice["plugin"] = obj.__name
+    choice["type"] = "launch"
+    choice["url"] = full_url
+    choice["scheme"] = url_scheme
+    choice["uuid"] = obj.__name .. "__" .. provider_key
+    table.insert(choices, choice)
+
+    return choices
+end
+
 function obj.completionCallback(rowInfo)
     if rowInfo["type"] == "launch" then
         local handler = nil
@@ -119,6 +160,19 @@ end
 function obj:providersTable(aTable)
     if aTable then
         self.providers = aTable
+        -- Refresh commands so new provider keys are registered
+        if self.seal then
+            -- Clear old urlformats commands
+            for cmd, cmdInfo in pairs(self.seal.commands) do
+                if cmdInfo.plugin == self.__name then
+                    self.seal.commands[cmd] = nil
+                end
+            end
+            -- Re-register all commands from this plugin
+            for cmd, cmdInfo in pairs(self:commands()) do
+                self.seal.commands[cmd] = cmdInfo
+            end
+        end
     else
         return self.providers
     end
