@@ -159,6 +159,21 @@ end
 --- ```
 function obj:providersTable(aTable)
     if aTable then
+        -- Check for conflicts with pinnedPrefixes
+        if self.seal and self.seal.pinnedPrefixes then
+            for provider_key, _ in pairs(aTable) do
+                for pinned_prefix, _ in pairs(self.seal.pinnedPrefixes) do
+                    if provider_key:lower() == pinned_prefix:lower() then
+                        error(string.format(
+                            "CONFLICT: URL format provider prefix '%s' conflicts with pinned prefix '%s'. " ..
+                            "Please use different prefixes for pinnedPrefixes and URL format providers.",
+                            provider_key, pinned_prefix
+                        ))
+                    end
+                end
+            end
+        end
+
         self.providers = aTable
         -- Refresh commands so new provider keys are registered
         if self.seal then

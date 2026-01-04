@@ -209,7 +209,7 @@ end
 --- Notes:
 ---  * Ranking dimensions in order of precedence:
 ---    1. Priority tier - High-priority plugins (score >= 50000) always win
----    2. Pinned prefix - Results matching a configured pinnedPrefixes entry
+---    2. Pinned/Provider prefix - Results matching pinnedPrefixes OR urlformat provider prefixes
 ---    3. Prefix match - Items starting with query beat substring matches
 ---    4. Frecency - Previously selected items ranked by most recent use
 ---    5. Alphabetical - Final tiebreaker for consistent ordering
@@ -244,6 +244,32 @@ function obj:sortChoices(choices, query)
         return false
     end
 
+    -- Helper: check if choice is from a urlformat provider prefix command
+    local function isUrlFormatProviderMatch(choice)
+        if query_lower == "" then return false end
+        -- Check if this is a urlformats choice
+        if choice.plugin ~= "seal_urlformats" then return false end
+        -- Check if query matches a urlformat provider prefix
+        if not self.plugins.urlformats or not self.plugins.urlformats.providers then
+            return false
+        end
+        -- Extract the first word from the query (the command part)
+        local cmd = query:match("^%S+")
+        if not cmd then return false end
+        local cmd_lower = cmd:lower()
+        -- Check if this command matches a provider key
+        for provider_key, _ in pairs(self.plugins.urlformats.providers) do
+            if provider_key:lower() == cmd_lower then
+                -- Check if this choice is for this specific provider
+                local uuid_suffix = "__" .. provider_key
+                if choice.uuid and choice.uuid:find(uuid_suffix, 1, true) then
+                    return true
+                end
+            end
+        end
+        return false
+    end
+
     -- Helper: get display text for alphabetical sorting
     local function getSortText(choice)
         return tostring(choice.text or ""):lower()
@@ -256,6 +282,9 @@ function obj:sortChoices(choices, query)
 
         -- Pinned prefix match
         choice._pinned_match = isPinnedMatch(choice)
+
+        -- URL format provider prefix match (same priority as pinned)
+        choice._urlformat_provider_match = isUrlFormatProviderMatch(choice)
 
         -- Frecency score (0 if never selected, timestamp if selected)
         if self.frecency_enable and choice.uuid then
@@ -278,9 +307,11 @@ function obj:sortChoices(choices, query)
             return a._high_priority
         end
 
-        -- 2. Pinned prefix match wins
-        if a._pinned_match ~= b._pinned_match then
-            return a._pinned_match
+        -- 2. Pinned prefix match OR urlformat provider match wins (same priority)
+        local a_pinned_or_provider = a._pinned_match or a._urlformat_provider_match
+        local b_pinned_or_provider = b._pinned_match or b._urlformat_provider_match
+        if a_pinned_or_provider ~= b_pinned_or_provider then
+            return a_pinned_or_provider
         end
 
         -- 3. Prefix match wins
@@ -733,7 +764,7 @@ function obj.choicesCallback()
         end
     end
 
-    -- Sort choices (priority > pinned > prefix match > frecency > alphabetical)
+    -- Sort choices (priority > pinned/provider > prefix match > frecency > alphabetical)
     obj:sortChoices(choices, query)
 
     return choices
