@@ -15710,7 +15710,7 @@
         "doc": "Gets or sets the current providers table\n\nParameters:\n * aTable - An optional table of providers, which must contain the following keys:\n   * name - A string naming the provider, which will be shown in the Seal results\n   * url - A string containing the URL to insert the user's query into. This should contain one and only one `%s`\n\nReturns:\n * Either a table of current providers, if no parameter was passed, or nothing if a parmameter was passed.\n\nNotes:\n * An example table might look like:\n```lua\n{\n  rhbz = { name = \"Red Hat Bugzilla\", url = \"https://bugzilla.redhat.com/show_bug.cgi?id=%s\", },\n  lp = { name = \"Launchpad Bug\", url = \"https://launchpad.net/bugs/%s\", },\n}\n```",
         "examples": [],
         "file": "Source/Seal.spoon/seal_urlformats.lua",
-        "lineno": "99",
+        "lineno": "140",
         "name": "providersTable",
         "notes": [
           " * An example table might look like:",
@@ -15742,7 +15742,7 @@
         "doc": "Gets or sets the current providers table\n\nParameters:\n * aTable - An optional table of providers, which must contain the following keys:\n   * name - A string naming the provider, which will be shown in the Seal results\n   * url - A string containing the URL to insert the user's query into. This should contain one and only one `%s`\n\nReturns:\n * Either a table of current providers, if no parameter was passed, or nothing if a parmameter was passed.\n\nNotes:\n * An example table might look like:\n```lua\n{\n  rhbz = { name = \"Red Hat Bugzilla\", url = \"https://bugzilla.redhat.com/show_bug.cgi?id=%s\", },\n  lp = { name = \"Launchpad Bug\", url = \"https://launchpad.net/bugs/%s\", },\n}\n```",
         "examples": [],
         "file": "Source/Seal.spoon/seal_urlformats.lua",
-        "lineno": "99",
+        "lineno": "140",
         "name": "providersTable",
         "notes": [
           " * An example table might look like:",
